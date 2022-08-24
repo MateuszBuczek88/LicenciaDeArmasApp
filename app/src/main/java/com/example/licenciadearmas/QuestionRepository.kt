@@ -6,7 +6,6 @@ data class QuestionRepository(val questions: List<Question>) : IQuestionReposito
         return questions
     }
 
-
     override fun nextQuestion(): Question {
         return question.next()
     }
