@@ -1,6 +1,8 @@
-package com.example.licenciadearmas
+package com.example.licenciadearmas.data.questions
 
-val questions = listOf(
+import com.example.licenciadearmas.data.Question
+
+val questionsTema1 = listOf(
     Question(
         "El arma de fuego que se recarga automáticamente, después de cada disparo, efectuando varios disparos sucesivos accionando el disparador una sola vez, se denomina:",
         listOf(

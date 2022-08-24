@@ -12,6 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.licenciadearmas.data.Question
+import com.example.licenciadearmas.data.QuestionRepository
+import com.example.licenciadearmas.data.Sections
+import com.example.licenciadearmas.data.questions.*
+
 import com.example.licenciadearmas.ui.theme.LicenciaDeArmasTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +29,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column() {
-                        QuestionCard(question = questionRepo.nextQuestion())
+                        QuestionCard(
+                            question = questionRepo.getQuestionList(Sections.Tema1).first()
+                        )
 
                     }
                 }
@@ -33,17 +40,34 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-val questionRepo = QuestionRepository(Questions)
+val questionRepo = QuestionRepository(
+    questionsTema1,
+    questionsTema2,
+    questionsTema3,
+    questionsTema4,
+    questionsTema5,
+    questionsTema6,
+    questionsTema7
+)
 
 @Composable
 fun QuestionCard(question: Question) {
     Column() {
-        Surface(shape = MaterialTheme.shapes.small, elevation = 1.dp, modifier = Modifier.padding(all = 6.dp)) {
+        Surface(
+            shape = MaterialTheme.shapes.small,
+            elevation = 1.dp,
+            modifier = Modifier.padding(all = 6.dp)
+        ) {
             Text(text = question.text, style = MaterialTheme.typography.h6)
         }
         Spacer(modifier = Modifier.height(4.dp))
         question.answersList.forEach {
-            Surface(shape = MaterialTheme.shapes.small, elevation = 1.dp, modifier = Modifier.fillMaxWidth().clickable {  }) {
+            Surface(
+                shape = MaterialTheme.shapes.small,
+                elevation = 1.dp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { }) {
                 Text(text = it, modifier = Modifier.padding(all = 12.dp))
             }
         }
