@@ -3,10 +3,8 @@ package com.example.licenciadearmas
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -40,10 +38,14 @@ val questionRepo = QuestionRepository(Questions)
 @Composable
 fun QuestionCard(question: Question) {
     Column() {
-        Text(text = question.text)
+        Surface(shape = MaterialTheme.shapes.small, elevation = 1.dp, modifier = Modifier.padding(all = 6.dp)) {
+            Text(text = question.text, style = MaterialTheme.typography.h6)
+        }
         Spacer(modifier = Modifier.height(4.dp))
         question.answersList.forEach {
-            Text(text = it)
+            Surface(shape = MaterialTheme.shapes.small, elevation = 1.dp, modifier = Modifier.fillMaxWidth().clickable {  }) {
+                Text(text = it, modifier = Modifier.padding(all = 12.dp))
+            }
         }
     }
 }
