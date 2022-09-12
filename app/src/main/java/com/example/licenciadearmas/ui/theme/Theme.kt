@@ -5,6 +5,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.colorResource
+import com.example.licenciadearmas.R
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -28,6 +30,13 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
+fun LightColorPalette() = lightColors(
+    primary = colorResource(id = R.color.primaryColor),
+    primaryVariant = colorResource(id = R.color.primaryLightColor),
+    secondary = Teal200
+)
+
+@Composable
 fun LicenciaDeArmasTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
@@ -35,7 +44,7 @@ fun LicenciaDeArmasTheme(
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
-        LightColorPalette
+        LightColorPalette()
     }
 
     MaterialTheme(
