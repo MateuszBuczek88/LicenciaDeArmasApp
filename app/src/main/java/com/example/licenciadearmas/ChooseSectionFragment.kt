@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.findNavController
 import com.example.licenciadearmas.data.Sections
 
@@ -31,18 +31,7 @@ class ChooseSectionFragment : Fragment() {
 
                 ChooseSectionContent {
                     findNavController().navigate(
-                        ChooseSectionFragmentDirections.actionChooseSectionFragmentToLearnFragment(
-                            when (it) {
-                                Sections.Tema1 -> it
-                                Sections.Tema2 -> it
-                                Sections.Tema3 -> it
-                                Sections.Tema4 -> it
-                                Sections.Tema5 -> it
-                                Sections.Tema6 -> it
-                                Sections.Tema7 -> it
-                            }
-
-                        )
+                        ChooseSectionFragmentDirections.actionChooseSectionFragmentToLearnFragment(it)
                     )
                 }
             }
@@ -55,51 +44,15 @@ class ChooseSectionFragment : Fragment() {
 fun ChooseSectionContent(sectionClick: (Sections) -> Unit) {
 
     Column() {
-        SectionCard(
-            onSectionClick = sectionClick,
-            section_name = stringResource(id = R.string.section_1_name),
-            description = stringResource(id = R.string.section_1_description),
-            section = Sections.Tema1
-        )
-        SectionCard(
-            onSectionClick = sectionClick,
-            section_name = stringResource(id = R.string.section_2_name),
-            description = stringResource(id = R.string.section_2_description),
-            section = Sections.Tema2
-        )
-
-        SectionCard(
-            onSectionClick = sectionClick,
-            section_name = stringResource(id = R.string.section_3_name),
-            description = stringResource(id = R.string.section_3_description),
-            section = Sections.Tema3
-        )
-        SectionCard(
-            onSectionClick = sectionClick,
-            section_name = stringResource(id = R.string.section_4_name),
-            description = stringResource(id = R.string.section_4_description),
-            section = Sections.Tema4
-        )
-        SectionCard(
-            onSectionClick = sectionClick,
-            section_name = stringResource(id = R.string.section_5_name),
-            description = stringResource(id = R.string.section_5_description),
-            section = Sections.Tema5
-        )
-        SectionCard(
-            onSectionClick = sectionClick,
-            section_name = stringResource(id = R.string.section_6_name),
-            description = stringResource(id = R.string.section_6_description),
-            section = Sections.Tema6
-        )
-        SectionCard(
-            onSectionClick = sectionClick,
-            section_name = stringResource(id = R.string.section_7_name),
-            description = stringResource(id = R.string.section_7_description),
-            section = Sections.Tema7
-        )
-
-
+        Sections.values().forEach {
+            SectionCard(
+                onSectionClick = sectionClick,
+                section_name = stringResource(id = it._name),
+                description = stringResource(id = it.description),
+                section = it
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+        }
     }
 }
 
@@ -118,7 +71,7 @@ fun SectionCard(
 ) {
     Row() {
 
-        Surface(Modifier.clickable { onSectionClick(section) }) {
+        Surface(Modifier.fillMaxWidth().clickable { onSectionClick(section) }) {
             Column() {
                 Text(
                     text = section_name,
