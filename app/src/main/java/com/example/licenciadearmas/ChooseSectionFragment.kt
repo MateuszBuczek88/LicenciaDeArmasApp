@@ -17,9 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.findNavController
 import com.example.licenciadearmas.data.Sections
 
-
 class ChooseSectionFragment : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,13 +29,14 @@ class ChooseSectionFragment : Fragment() {
 
                 ChooseSectionContent { section ->
                     findNavController().navigate(
-                        ChooseSectionFragmentDirections.actionChooseSectionFragmentToLearnFragment(section)
+                        ChooseSectionFragmentDirections.actionChooseSectionFragmentToLearnFragment(
+                            section
+                        )
                     )
                 }
             }
         }
     }
-
 }
 
 @Composable
@@ -61,11 +60,11 @@ fun SectionCard(
     section: Sections
 ) {
     Row {
-
         Surface(
             Modifier
                 .fillMaxWidth()
-                .clickable { onSectionClick(section) }) {
+                .clickable { onSectionClick(section) }
+        ) {
             Column {
                 Text(
                     text = stringResource(id = section.nameResId),
@@ -83,6 +82,6 @@ fun SectionCard(
 
 @Preview
 @Composable
-fun ChooseSectionContentPreview() {
+private fun ChooseSectionContentPreview() {
     ChooseSectionContent({})
 }
