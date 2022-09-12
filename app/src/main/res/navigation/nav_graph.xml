@@ -9,4 +9,20 @@
         android:id="@+id/homeScreenFragment"
         android:name="com.example.licenciadearmas.HomeScreenFragment"
         android:label="fragment_home_screen"/>
+    <fragment
+        android:id="@+id/learnFragment"
+        android:name="com.example.licenciadearmas.LearnFragment"
+        android:label="LearnFragment" >
+        <argument
+            android:name="section"
+            app:argType="com.example.licenciadearmas.data.Sections" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseSectionFragment"
+        android:name="com.example.licenciadearmas.ChooseSectionFragment"
+        android:label="ChooseSectionFragment" >
+        <action
+            android:id="@+id/action_chooseSectionFragment_to_learnFragment"
+            app:destination="@id/learnFragment" />
+    </fragment>
 </navigation>
