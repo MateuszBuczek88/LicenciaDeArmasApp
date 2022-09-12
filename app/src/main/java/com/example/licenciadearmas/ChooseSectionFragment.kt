@@ -24,14 +24,14 @@ class ChooseSectionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         return ComposeView(requireContext()).apply {
             setContent {
 
-                ChooseSectionContent {
+                ChooseSectionContent { section ->
                     findNavController().navigate(
-                        ChooseSectionFragmentDirections.actionChooseSectionFragmentToLearnFragment(it)
+                        ChooseSectionFragmentDirections.actionChooseSectionFragmentToLearnFragment(section)
                     )
                 }
             }
@@ -43,7 +43,7 @@ class ChooseSectionFragment : Fragment() {
 @Composable
 fun ChooseSectionContent(sectionClick: (Sections) -> Unit) {
 
-    Column() {
+    Column {
         Sections.values().forEach {
             SectionCard(
                 onSectionClick = sectionClick,
@@ -54,33 +54,35 @@ fun ChooseSectionContent(sectionClick: (Sections) -> Unit) {
     }
 }
 
-@Preview
-@Composable
-fun ChooseSectionContentPreview() {
-    ChooseSectionContent({})
-}
 
 @Composable
 fun SectionCard(
     onSectionClick: (Sections) -> Unit,
     section: Sections
 ) {
-    Row() {
+    Row {
 
         Surface(
             Modifier
                 .fillMaxWidth()
                 .clickable { onSectionClick(section) }) {
-            Column() {
+            Column {
                 Text(
-                    text = stringResource(id = section._name),
+                    text = stringResource(id = section.nameResId),
                     style = MaterialTheme.typography.body1
                 )
                 Text(
-                    text = stringResource(id = section.description),
+                    text = stringResource(id = section.descriptionResId),
                     style = MaterialTheme.typography.body2
                 )
             }
         }
     }
+}
+
+
+@Preview
+@Composable
+fun ChooseSectionContentPreview() {
+    ChooseSectionContent({})
 }
