@@ -5,8 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -16,6 +15,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.findNavController
+
 import com.example.licenciadearmas.ui.theme.LicenciaDeArmasTheme
 
 class HomeScreenFragment : Fragment() {
@@ -28,6 +28,9 @@ class HomeScreenFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
+                    HomeScreenContent(
+                        onLearnButtonClick = { findNavController().navigate(R.id.chooseSectionFragment) }
+                    )
                 }
             }
         }
@@ -50,9 +53,10 @@ fun HomeScreenContent(onLearnButtonClick: () -> Unit) {
         }
     }
 }
+
 @Preview
 @Composable
-fun HomeScreenContetnPreview(){
+fun HomeScreenContetnPreview() {
     HomeScreenContent {
     }
 }
