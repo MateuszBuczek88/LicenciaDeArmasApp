@@ -47,8 +47,6 @@ fun ChooseSectionContent(sectionClick: (Sections) -> Unit) {
         Sections.values().forEach {
             SectionCard(
                 onSectionClick = sectionClick,
-                section_name = stringResource(id = it._name),
-                description = stringResource(id = it.description),
                 section = it
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -65,20 +63,21 @@ fun ChooseSectionContentPreview() {
 @Composable
 fun SectionCard(
     onSectionClick: (Sections) -> Unit,
-    section_name: String,
-    description: String,
     section: Sections
 ) {
     Row() {
 
-        Surface(Modifier.fillMaxWidth().clickable { onSectionClick(section) }) {
+        Surface(
+            Modifier
+                .fillMaxWidth()
+                .clickable { onSectionClick(section) }) {
             Column() {
                 Text(
-                    text = section_name,
+                    text = stringResource(id = section._name),
                     style = MaterialTheme.typography.body1
                 )
                 Text(
-                    text = description,
+                    text = stringResource(id = section.description),
                     style = MaterialTheme.typography.body2
                 )
             }
