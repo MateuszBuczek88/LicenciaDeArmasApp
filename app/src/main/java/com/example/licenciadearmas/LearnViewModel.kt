@@ -10,10 +10,13 @@ import com.example.licenciadearmas.data.Sections
 class LearnViewModel(val repository: IQuestionRepository, val section: Sections) : ViewModel() {
     private val questionList: MutableList<Question> =
         repository.getQuestionList(section).toMutableList()
-    private val _question = MutableLiveData<Question>(questionList.first())
+    private val _question = MutableLiveData(questionList.first())
     val question: LiveData<Question>
         get() = _question
 
+    private var _showAnswer = MutableLiveData(false)
+    val showAnswer : LiveData<Boolean>
+    get() = _showAnswer
 
     fun nextQuestion() {
         _question.value?.let { questionList.add(it) }
@@ -25,5 +28,9 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Sections)
         _question.value = questionList.last()
         question.value?.let { questionList.add(0, it) }
         questionList.removeLast()
+    }
+
+    fun showAnswer(){
+        _showAnswer.value=true
     }
 }
