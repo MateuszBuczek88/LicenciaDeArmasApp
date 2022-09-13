@@ -5,7 +5,6 @@ import com.example.licenciadearmas.data.IQuestionRepository
 import com.example.licenciadearmas.data.QuestionRepository
 import com.example.licenciadearmas.data.Sections
 import com.example.licenciadearmas.data.questions.*
-import org.koin.androidx.compose.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

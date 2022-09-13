@@ -24,7 +24,7 @@ class HomeScreenFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
@@ -39,7 +39,7 @@ class HomeScreenFragment : Fragment() {
 
 @Composable
 fun HomeScreenContent(onLearnClick: () -> Unit) {
-    Surface() {
+    Surface {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -56,7 +56,7 @@ fun HomeScreenContent(onLearnClick: () -> Unit) {
 
 @Preview
 @Composable
-fun HomeScreenContetnPreview() {
+fun HomeScreenContentPreview() {
     HomeScreenContent {
     }
 }
