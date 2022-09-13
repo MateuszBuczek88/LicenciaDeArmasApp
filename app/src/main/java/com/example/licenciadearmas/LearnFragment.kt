@@ -5,16 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.dp
 import androidx.navigation.fragment.navArgs
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Sections
@@ -34,12 +35,19 @@ class LearnFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
+
                     val question: Question? by viewModel.question.observeAsState()
+                    val showAnswer by viewModel.showAnswer.observeAsState()
 
                     question?.let {
-                        LearnContent(question = it,
-                            onNextClick = { viewModel.nextQuestion() },
-                            onPrevClick = { viewModel.prevQuestion() })
+                        showAnswer?.let { showButtons ->
+                            LearnContent(question = it,
+                                onNextClick = { viewModel.nextQuestion() },
+                                onPrevClick = { viewModel.prevQuestion() },
+                                showButtons = showButtons,
+                                onQuestionClick = { viewModel.showAnswer() }
+                            )
+                        }
                     }
                 }
             }
@@ -48,17 +56,41 @@ class LearnFragment : Fragment() {
 }
 
 @Composable
-fun LearnContent(question: Question, onNextClick: () -> Unit, onPrevClick: () -> Unit) {
+fun LearnContent(
+    question: Question,
+    onNextClick: () -> Unit,
+    onPrevClick: () -> Unit,
+    onQuestionClick: () -> Unit,
+    showButtons: Boolean
+) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        QuestionCard(questionText = question.text, onQuestionClick = onQuestionClick)
 
-        QuestionCard(text = question.text)
+        Spacer(modifier = Modifier.height(20.dp))
+
+        if (showButtons) {
+            AnswerCard(answerText = question.rightAnswer)
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row {
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "OK")
+                }
+
+                Spacer(modifier = Modifier.width(20.dp))
+
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "WRONG")
+                }
+            }
+        }
         Button(onClick = onNextClick) {
             Text(text = "Next")
         }
-
         Button(onClick = onPrevClick) {
             Text(text = "prev")
         }
@@ -66,8 +98,15 @@ fun LearnContent(question: Question, onNextClick: () -> Unit, onPrevClick: () ->
 }
 
 @Composable
-fun QuestionCard(text: String) {
+fun QuestionCard(questionText: String, onQuestionClick: () -> Unit) {
+    Surface(modifier = Modifier.clickable(onClick = onQuestionClick)) {
+        Text(text = questionText)
+    }
+}
+
+@Composable
+fun AnswerCard(answerText: String) {
     Surface {
-        Text(text = text)
+        Text(text = answerText)
     }
 }
