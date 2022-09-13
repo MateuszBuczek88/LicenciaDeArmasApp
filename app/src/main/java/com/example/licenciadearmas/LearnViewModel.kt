@@ -8,8 +8,9 @@ import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Sections
 
 class LearnViewModel(val repository: IQuestionRepository, val section: Sections) : ViewModel() {
-    val questionList: MutableList<Question> = repository.getQuestionList(section).toMutableList()
-    val _question  =  MutableLiveData<Question>(questionList.first())
+    private val questionList: MutableList<Question> =
+        repository.getQuestionList(section).toMutableList()
+    private val _question = MutableLiveData<Question>(questionList.first())
     val question: LiveData<Question>
         get() = _question
 
