@@ -29,7 +29,7 @@ class HomeScreenFragment : Fragment() {
             setContent {
                 LicenciaDeArmasTheme {
                     HomeScreenContent(
-                        onLearnButtonClick = { findNavController().navigate(R.id.chooseSectionFragment) }
+                        onLearnClick = { findNavController().navigate(R.id.chooseSectionFragment) }
                     )
                 }
             }
@@ -38,13 +38,13 @@ class HomeScreenFragment : Fragment() {
 }
 
 @Composable
-fun HomeScreenContent(onLearnButtonClick: () -> Unit) {
+fun HomeScreenContent(onLearnClick: () -> Unit) {
     Surface() {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = onLearnButtonClick) {
+            Button(onClick = onLearnClick) {
                 Text(text = stringResource(id = R.string.learn_button_text))
             }
             Button(onClick = { /*TODO*/ }) {
