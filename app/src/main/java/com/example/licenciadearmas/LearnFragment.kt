@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -38,19 +39,25 @@ class LearnFragment : Fragment() {
 
                     val question: Question? by viewModel.question.observeAsState()
                     val showAnswer by viewModel.showAnswer.observeAsState()
+                    val showCongrats by viewModel.showCongrats.observeAsState()
 
-                    question?.let {
-                        showAnswer?.let { showButtons ->
-                            LearnContent(question = it,
-                                onNextClick = { viewModel.nextQuestion() },
-                                onPrevClick = { viewModel.prevQuestion() },
-                                showButtons = showButtons,
-                                onQuestionClick = { viewModel.showAnswer() },
-                                rightAnswer  = {viewModel.rightAnswer()},
-                                wrongAnswer =   {viewModel.wrongAnswer()}
+                    if (showCongrats != true) {
+                        question?.let {
+                            showAnswer?.let { showAnswer ->
 
-                            )
+                                LearnContent(
+                                    question = it,
+                                    onNextClick = { viewModel.nextQuestion() },
+                                    onPrevClick = { viewModel.prevQuestion() },
+                                    showButtons = showAnswer,
+                                    onQuestionClick = { viewModel.showAnswer() },
+                                    rightAnswer = { viewModel.rightAnswer() },
+                                    wrongAnswer = { viewModel.wrongAnswer() }
+                                )
+                            }
                         }
+                    } else {
+                        AllQuestionsLearnedCard()
                     }
                 }
             }
@@ -65,30 +72,27 @@ fun LearnContent(
     onPrevClick: () -> Unit,
     onQuestionClick: () -> Unit,
     showButtons: Boolean,
-    rightAnswer: ()->Unit,
-    wrongAnswer: ()->Unit
+    rightAnswer: () -> Unit,
+    wrongAnswer: () -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         QuestionCard(questionText = question.text, onQuestionClick = onQuestionClick)
-
         Spacer(modifier = Modifier.height(20.dp))
 
         if (showButtons) {
             AnswerCard(answerText = question.rightAnswer)
-
             Spacer(modifier = Modifier.height(20.dp))
 
             Row {
-                Button(onClick =  rightAnswer ) {
+                Button(onClick = rightAnswer) {
                     Text(text = "OK")
                 }
-
                 Spacer(modifier = Modifier.width(20.dp))
 
-                Button(onClick =  wrongAnswer ) {
+                Button(onClick = wrongAnswer) {
                     Text(text = "WRONG")
                 }
             }
@@ -113,5 +117,23 @@ fun QuestionCard(questionText: String, onQuestionClick: () -> Unit) {
 fun AnswerCard(answerText: String) {
     Surface {
         Text(text = answerText)
+    }
+}
+
+@Composable
+fun AllQuestionsLearnedCard() {
+    Surface {
+        Column(verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally)
+        {
+            Text(text = "Congrats", style = MaterialTheme.typography.body1)
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "Again")
+            }
+
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "Home")
+            }
+        }
     }
 }
