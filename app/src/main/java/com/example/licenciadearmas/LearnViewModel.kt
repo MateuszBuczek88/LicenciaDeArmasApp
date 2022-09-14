@@ -15,9 +15,12 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Sections)
          viewModelScope.launch {
              questionList = repository.getQuestionList(section).toMutableList()
              _question.value = questionList.first()
-
+             _isLoading.value = false
         }
     }
+    private var _isLoading = MutableLiveData<Boolean>(true)
+    val isLoading : LiveData<Boolean>
+    get() = _isLoading
 
     private var _question = MutableLiveData<Question?>(null)
     val question: LiveData<Question?>

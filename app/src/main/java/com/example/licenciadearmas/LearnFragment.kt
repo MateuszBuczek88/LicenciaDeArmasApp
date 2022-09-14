@@ -7,11 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,28 +34,32 @@ class LearnFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
-
+                    val isLoading by viewModel.isLoading.observeAsState()
                     val question: Question? by viewModel.question.observeAsState()
                     val showAnswer by viewModel.showAnswer.observeAsState()
                     val showCongrats by viewModel.showCongrats.observeAsState()
 
-                    if (showCongrats != true) {
-                        question?.let {
-                            showAnswer?.let { showAnswer ->
+                    if (isLoading != true) {
+                        if (showCongrats != true) {
+                            question?.let {
+                                showAnswer?.let { showAnswer ->
 
-                                LearnContent(
-                                    question = it,
-                                    onNextClick = { viewModel.nextQuestion() },
-                                    onPrevClick = { viewModel.prevQuestion() },
-                                    showButtons = showAnswer,
-                                    onQuestionClick = { viewModel.showAnswer() },
-                                    rightAnswer = { viewModel.rightAnswer() },
-                                    wrongAnswer = { viewModel.wrongAnswer() }
-                                )
+                                    LearnContent(
+                                        question = it,
+                                        onNextClick = { viewModel.nextQuestion() },
+                                        onPrevClick = { viewModel.prevQuestion() },
+                                        showButtons = showAnswer,
+                                        onQuestionClick = { viewModel.showAnswer() },
+                                        rightAnswer = { viewModel.rightAnswer() },
+                                        wrongAnswer = { viewModel.wrongAnswer() }
+                                    )
+                                }
                             }
+                        } else {
+                            AllQuestionsLearnedCard()
                         }
                     } else {
-                        AllQuestionsLearnedCard()
+                        LoadingScreen()
                     }
                 }
             }
@@ -124,8 +125,10 @@ fun AnswerCard(answerText: String) {
 @Composable
 fun AllQuestionsLearnedCard() {
     Surface {
-        Column(verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally)
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        )
         {
             Text(text = "Congrats", style = MaterialTheme.typography.body1)
             Button(onClick = { /*TODO*/ }) {
@@ -135,6 +138,19 @@ fun AllQuestionsLearnedCard() {
             Button(onClick = { /*TODO*/ }) {
                 Text(text = "Home")
             }
+        }
+    }
+}
+
+@Composable
+fun LoadingScreen() {
+    Surface() {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CircularProgressIndicator(strokeWidth = 5.dp, modifier = Modifier.size(80.dp,80.dp))
+            Text(text = "Loading", style = MaterialTheme.typography.body1)
         }
     }
 }
