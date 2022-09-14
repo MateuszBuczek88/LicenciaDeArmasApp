@@ -45,7 +45,10 @@ class LearnFragment : Fragment() {
                                 onNextClick = { viewModel.nextQuestion() },
                                 onPrevClick = { viewModel.prevQuestion() },
                                 showButtons = showButtons,
-                                onQuestionClick = { viewModel.showAnswer() }
+                                onQuestionClick = { viewModel.showAnswer() },
+                                rightAnswer  = {viewModel.rightAnswer()},
+                                wrongAnswer =   {viewModel.wrongAnswer()}
+
                             )
                         }
                     }
@@ -61,7 +64,9 @@ fun LearnContent(
     onNextClick: () -> Unit,
     onPrevClick: () -> Unit,
     onQuestionClick: () -> Unit,
-    showButtons: Boolean
+    showButtons: Boolean,
+    rightAnswer: ()->Unit,
+    wrongAnswer: ()->Unit
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -77,13 +82,13 @@ fun LearnContent(
             Spacer(modifier = Modifier.height(20.dp))
 
             Row {
-                Button(onClick = { /*TODO*/ }) {
+                Button(onClick =  rightAnswer ) {
                     Text(text = "OK")
                 }
 
                 Spacer(modifier = Modifier.width(20.dp))
 
-                Button(onClick = { /*TODO*/ }) {
+                Button(onClick =  wrongAnswer ) {
                     Text(text = "WRONG")
                 }
             }

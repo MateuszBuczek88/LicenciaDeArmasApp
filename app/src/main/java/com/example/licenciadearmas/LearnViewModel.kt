@@ -15,8 +15,8 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Sections)
         get() = _question
 
     private var _showAnswer = MutableLiveData(false)
-    val showAnswer : LiveData<Boolean>
-    get() = _showAnswer
+    val showAnswer: LiveData<Boolean>
+        get() = _showAnswer
 
     fun nextQuestion() {
         _question.value?.let { questionList.add(it) }
@@ -30,7 +30,24 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Sections)
         questionList.removeLast()
     }
 
-    fun showAnswer(){
-        _showAnswer.value=true
+    fun showAnswer() {
+        _showAnswer.value = true
+    }
+
+    fun rightAnswer() {
+        questionList.removeFirstOrNull()
+        if (questionList.isNotEmpty()) {
+            _question.value = questionList.first()
+        } else {/*TODO*/}
+        _showAnswer.value = false
+    }
+
+    fun wrongAnswer() {
+        if (questionList.isNotEmpty()) {
+            _question.value?.let { questionList.add(it) }
+            questionList.removeFirst()
+            _question.value = questionList.first()
+        }
+        _showAnswer.value = false
     }
 }
