@@ -3,15 +3,24 @@ package com.example.licenciadearmas
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.licenciadearmas.data.IQuestionRepository
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Sections
+import kotlinx.coroutines.launch
 
 class LearnViewModel(val repository: IQuestionRepository, val section: Sections) : ViewModel() {
-    private val questionList: MutableList<Question> =
-        repository.getQuestionList(section).toMutableList()
-    private val _question = MutableLiveData(questionList.first())
-    val question: LiveData<Question>
+   lateinit var questionList: MutableList<Question>
+    fun getQuestions() {
+         viewModelScope.launch {
+             questionList = repository.getQuestionList(section).toMutableList()
+             _question.value = questionList.first()
+
+        }
+    }
+
+    private var _question = MutableLiveData<Question?>(null)
+    val question: LiveData<Question?>
         get() = _question
 
     private var _showAnswer = MutableLiveData(false)
@@ -42,10 +51,10 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Sections)
         questionList.removeFirstOrNull()
         if (questionList.isNotEmpty()) {
             _question.value = questionList.first()
+            _showAnswer.value = false
         } else {
             _showCongrats.value = true
         }
-        _showAnswer.value = false
     }
 
     fun wrongAnswer() {

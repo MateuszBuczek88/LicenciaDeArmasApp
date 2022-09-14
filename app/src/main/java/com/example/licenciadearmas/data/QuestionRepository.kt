@@ -1,6 +1,7 @@
 package com.example.licenciadearmas.data
 
 import com.example.licenciadearmas.data.questions.*
+import kotlinx.coroutines.delay
 
 data class QuestionRepository(
     val questionsTema1: List<Question>,
@@ -12,15 +13,16 @@ data class QuestionRepository(
     val questionsTema7: List<Question>
 ) : IQuestionRepository {
 
-    override fun getQuestionList(section: Sections): List<Question> =
-        when (section) {
-            Sections.Tema1 -> questionsTema1
-            Sections.Tema2 -> questionsTema2
-            Sections.Tema3 -> questionsTema3
-            Sections.Tema4 -> questionsTema4
-            Sections.Tema5 -> questionsTema5
-            Sections.Tema6 -> questionsTema6
-            Sections.Tema7 -> questionsTema7
-
-        }
+  override suspend fun getQuestionList(section: Sections): List<Question> {
+      delay(2000)
+      when (section) {
+          Sections.Tema1 ->return questionsTema1
+          Sections.Tema2 ->return questionsTema2
+          Sections.Tema3 ->return questionsTema3
+          Sections.Tema4 ->return questionsTema4
+          Sections.Tema5 ->return questionsTema5
+          Sections.Tema6 ->return questionsTema6
+          Sections.Tema7 ->return questionsTema7
+      }
+  }
 }
