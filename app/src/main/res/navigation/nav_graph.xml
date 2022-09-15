@@ -25,4 +25,8 @@
             android:id="@+id/action_chooseSectionFragment_to_learnFragment"
             app:destination="@id/learnFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.example.licenciadearmas.TestFragment"
+        android:label="TestFragment" />
 </navigation>
