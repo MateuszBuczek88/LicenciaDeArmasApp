@@ -25,4 +25,7 @@ val appModule = module {
     viewModel { (section: Sections) ->
         LearnViewModel(repository = get(), section = section)
     }
+    viewModel {
+        TestViewModel(get())
+    }
 }
