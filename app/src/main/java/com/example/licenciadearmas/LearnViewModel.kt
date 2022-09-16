@@ -13,7 +13,11 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Sections)
    lateinit var questionList: MutableList<Question>
     fun getQuestions() {
          viewModelScope.launch {
-             questionList = repository.getQuestionList(section).toMutableList()
+
+             questionList = repository.getQuestionList(section).
+// Live data error message to user in Fragment, make it possile to try again
+             fold({it.toMutableList()},{throw it})
+
              _question.value = questionList.firstOrNull()
              _isLoading.value = false
         }
