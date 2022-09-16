@@ -13,16 +13,16 @@ data class QuestionRepository(
     val questionsTema7: List<Question>
 ) : IQuestionRepository {
 
-  override suspend fun getQuestionList(section: Sections): List<Question> {
-      delay(2000)
-      when (section) {
-          Sections.Tema1 ->return questionsTema1
-          Sections.Tema2 ->return questionsTema2
-          Sections.Tema3 ->return questionsTema3
-          Sections.Tema4 ->return questionsTema4
-          Sections.Tema5 ->return questionsTema5
-          Sections.Tema6 ->return questionsTema6
-          Sections.Tema7 ->return questionsTema7
+  override suspend fun getQuestionList(section: Sections): Result<List<Question>>  {
+      delay(500)
+      return when (section) {
+          Sections.Tema1 -> runCatching { questionsTema1 }
+          Sections.Tema2 -> runCatching { questionsTema2 }
+          Sections.Tema3 -> runCatching { questionsTema3 }
+          Sections.Tema4 -> runCatching { questionsTema4 }
+          Sections.Tema5 -> runCatching { questionsTema5 }
+          Sections.Tema6 -> runCatching { questionsTema6 }
+          Sections.Tema7 -> runCatching { questionsTema7 }
       }
   }
 }

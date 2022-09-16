@@ -26,6 +26,6 @@ val appModule = module {
         LearnViewModel(repository = get(), section = section)
     }
     viewModel {
-        TestViewModel(get())
+        TestViewModel(repository = get())
     }
 }
