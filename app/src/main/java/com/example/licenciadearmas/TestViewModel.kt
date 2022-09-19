@@ -3,7 +3,6 @@ package com.example.licenciadearmas
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.licenciadearmas.data.IQuestionRepository
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Sections
@@ -22,7 +21,7 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
 
             Sections.values().map { sections ->
                 async {
-                    repository.getQuestionList(sections).map { it.shuffled().take(sections.toTest) }
+                    repository.getQuestionListFromLocalData(sections).map { it.shuffled().take(sections.toTest) }
                 }
             }
                 .awaitAll().let { resultList ->

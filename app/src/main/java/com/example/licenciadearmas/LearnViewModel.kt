@@ -14,7 +14,7 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Sections)
     fun getQuestions() {
         viewModelScope.launch {
 
-            repository.getQuestionList(section).fold({
+            repository.getQuestionListFromLocalData(section).fold({
                 questionList = it.toMutableList()
                 _question.value = questionList.firstOrNull()
             }, { _loadError.value = true })
