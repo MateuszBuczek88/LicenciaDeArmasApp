@@ -12,7 +12,7 @@ val appModule = module {
 
     single<IQuestionRepository> {
         QuestionRepository(
-            questionsTema1,
+           runCatching {  questionsTema1},
             questionsTema2,
             questionsTema3,
             questionsTema4,

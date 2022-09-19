@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
@@ -15,8 +16,10 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import com.example.licenciadearmas.data.Question
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TestFragment : Fragment() {
@@ -34,18 +37,16 @@ class TestFragment : Fragment() {
                 val isAnswerCorrect = viewModel.isAnswerCorrect.observeAsState(initial = false)
                 val rightAnswers by viewModel.rightAnswers.observeAsState()
                 val wrongAnswers = viewModel.wrongAnswers.observeAsState()
-                question?.let { text ->
-                    question?.let { answers ->
-                        Column {
-                            TestContent(
-                                text.text,
-                                answers.answersList,
-                                onAnswerButtonClick = { viewModel.checkAnswer(it) })
-                            Text(text = isAnswerCorrect.value.toString())
-                            Text(text = question!!.rightAnswer)
-                            Text(text = "rightanswers:${rightAnswers}/wronganswers:${wrongAnswers.value}")
-                        }
+                val loadError by viewModel.loadError.observeAsState()
+                Column {
+                    loadError?.let {
+                        TestContent(loadError= it, question = question,
+                            onAnswerButtonClick = { answer -> viewModel.checkAnswer(answer) })
                     }
+
+                    Text(text = isAnswerCorrect.toString())
+                    question?.let { Text(text = it.rightAnswer) }
+                    Text(text = "rightanswers:${rightAnswers}/wronganswers:${wrongAnswers.value}")
                 }
             }
         }
@@ -55,13 +56,24 @@ class TestFragment : Fragment() {
 
 @Composable
 fun TestContent(
-    questionText: String,
-    answers: List<String>,
+    loadError: Boolean,
+    question: Question?,
     onAnswerButtonClick: (String) -> Unit
 ) {
-    Column {
-        QuestionCard(questionText = questionText)
-        AnswersCard(answers = answers, onAnswerButtonClick = onAnswerButtonClick)
+    if (loadError) {
+        Toast.makeText(
+            LocalContext.current,
+            "Failure Loading Questions",
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    question?.let {
+        Column {
+
+            QuestionCard(questionText = question.text)
+            AnswersCard(answers = question.answersList, onAnswerButtonClick = onAnswerButtonClick)
+        }
     }
 }
 

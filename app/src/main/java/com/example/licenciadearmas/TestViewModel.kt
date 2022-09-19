@@ -19,19 +19,27 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
     fun getQuestions() {
         viewModelScope.launch {
 
-            testQuestionsList = Sections.values().map { sections ->
+            Sections.values().map { sections ->
                 async {
                     repository.getQuestionList(sections).map { it.shuffled().take(sections.toTest) }
                 }
             }
-                    //implement runCatching in let
-                .awaitAll().let { resultList -> resultList.flatMap { it.getOrThrow() }.toMutableList() }
-
-            _question.value = testQuestionsList.first()
+                .awaitAll().let { resultList ->
+                    runCatching {
+                        resultList.flatMap { it.getOrThrow() }
+                    }.fold({
+                        testQuestionsList = it.toMutableList()
+                        _question.value = testQuestionsList.first()
+                    },
+                        {_loadError.value = true})
+                }
         }
     }
 
     lateinit var testQuestionsList: MutableList<Question>
+    private val _loadError = MutableLiveData<Boolean>(false)
+    val loadError: LiveData<Boolean>
+        get() = _loadError
     private val _question = MutableLiveData<Question?>(null)
     val question: LiveData<Question?>
         get() = _question
@@ -63,6 +71,6 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
     fun nextQuestion() {
         testQuestionsList.removeFirstOrNull()
         _question.value = testQuestionsList.first()
-         _isAnswerCorrect.value = false
+        _isAnswerCorrect.value = false
     }
 }

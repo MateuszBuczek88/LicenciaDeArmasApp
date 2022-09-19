@@ -10,21 +10,26 @@ import com.example.licenciadearmas.data.Sections
 import kotlinx.coroutines.launch
 
 class LearnViewModel(val repository: IQuestionRepository, val section: Sections) : ViewModel() {
-   lateinit var questionList: MutableList<Question>
+    lateinit var questionList: MutableList<Question>
     fun getQuestions() {
-         viewModelScope.launch {
+        viewModelScope.launch {
 
-             questionList = repository.getQuestionList(section).
-// Live data error message to user in Fragment, make it possile to try again
-             fold({it.toMutableList()},{throw it})
+            repository.getQuestionList(section).fold({
+                questionList = it.toMutableList()
+                _question.value = questionList.firstOrNull()
+            }, { _loadError.value = true })
 
-             _question.value = questionList.firstOrNull()
-             _isLoading.value = false
+            _isLoading.value = false
         }
     }
+
+    private val _loadError = MutableLiveData<Boolean>(false)
+    val loadError: LiveData<Boolean>
+        get() = _loadError
+
     private val _isLoading = MutableLiveData<Boolean>(true)
-    val isLoading : LiveData<Boolean>
-    get() = _isLoading
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
 
     private val _question = MutableLiveData<Question?>(null)
     val question: LiveData<Question?>

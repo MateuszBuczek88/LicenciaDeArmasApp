@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -13,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.fragment.navArgs
 import com.example.licenciadearmas.data.Question
@@ -38,14 +40,17 @@ class LearnFragment : Fragment() {
                     val question: Question? by viewModel.question.observeAsState()
                     val showAnswer by viewModel.showAnswer.observeAsState()
                     val showCongrats by viewModel.showCongrats.observeAsState()
+                    val loadError by viewModel.loadError.observeAsState()
 
                     if (isLoading != true) {
                         if (showCongrats != true) {
-                            question?.let {
-                                showAnswer?.let { showAnswer ->
 
+                            showAnswer?.let { showAnswer ->
+
+                                loadError?.let { it1 ->
                                     LearnContent(
-                                        question = it,
+                                        loadError = it1,
+                                        question = question,
                                         onNextClick = { viewModel.nextQuestion() },
                                         onPrevClick = { viewModel.prevQuestion() },
                                         showButtons = showAnswer,
@@ -55,6 +60,7 @@ class LearnFragment : Fragment() {
                                     )
                                 }
                             }
+
                         } else {
                             AllQuestionsLearnedCard()
                         }
@@ -69,7 +75,8 @@ class LearnFragment : Fragment() {
 
 @Composable
 fun LearnContent(
-    question: Question,
+    loadError: Boolean,
+    question: Question?,
     onNextClick: () -> Unit,
     onPrevClick: () -> Unit,
     onQuestionClick: () -> Unit,
@@ -81,21 +88,30 @@ fun LearnContent(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        QuestionCard(questionText = question.text, onQuestionClick = onQuestionClick)
-        Spacer(modifier = Modifier.height(20.dp))
-
-        if (showButtons) {
-            AnswerCard(answerText = question.rightAnswer)
+        if (loadError) {
+            Toast.makeText(
+                LocalContext.current,
+                "Failure Loading Questions",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        question?.let {
+            QuestionCard(questionText = question.text, onQuestionClick = onQuestionClick)
             Spacer(modifier = Modifier.height(20.dp))
 
-            Row {
-                Button(onClick = rightAnswer) {
-                    Text(text = "OK")
-                }
-                Spacer(modifier = Modifier.width(20.dp))
+            if (showButtons) {
+                AnswerCard(answerText = question.rightAnswer)
+                Spacer(modifier = Modifier.height(20.dp))
 
-                Button(onClick = wrongAnswer) {
-                    Text(text = "WRONG")
+                Row {
+                    Button(onClick = rightAnswer) {
+                        Text(text = "OK")
+                    }
+                    Spacer(modifier = Modifier.width(20.dp))
+
+                    Button(onClick = wrongAnswer) {
+                        Text(text = "WRONG")
+                    }
                 }
             }
         }
@@ -149,7 +165,7 @@ fun LoadingScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CircularProgressIndicator(strokeWidth = 5.dp, modifier = Modifier.size(80.dp,80.dp))
+            CircularProgressIndicator(strokeWidth = 5.dp, modifier = Modifier.size(80.dp, 80.dp))
             Text(text = "Loading", style = MaterialTheme.typography.body1)
         }
     }
