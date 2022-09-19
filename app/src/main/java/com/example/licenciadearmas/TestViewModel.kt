@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.licenciadearmas.data.IQuestionRepository
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Sections
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.awaitAll
@@ -17,7 +18,7 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
     }
 
     fun getQuestions() {
-        viewModelScope.launch {
+        MainScope().launch {
 
             Sections.values().map { sections ->
                 async {
