@@ -22,19 +22,19 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Sections)
              _isLoading.value = false
         }
     }
-    private var _isLoading = MutableLiveData<Boolean>(true)
+    private val _isLoading = MutableLiveData<Boolean>(true)
     val isLoading : LiveData<Boolean>
     get() = _isLoading
 
-    private var _question = MutableLiveData<Question?>(null)
+    private val _question = MutableLiveData<Question?>(null)
     val question: LiveData<Question?>
         get() = _question
 
-    private var _showAnswer = MutableLiveData(false)
+    private val _showAnswer = MutableLiveData(false)
     val showAnswer: LiveData<Boolean>
         get() = _showAnswer
 
-    private var _showCongrats = MutableLiveData<Boolean>(false)
+    private val _showCongrats = MutableLiveData<Boolean>(false)
     val showCongrats: LiveData<Boolean>
         get() = _showCongrats
 

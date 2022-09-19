@@ -32,16 +32,16 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
     }
 
     lateinit var testQuestionsList: MutableList<Question>
-    private var _question = MutableLiveData<Question?>(null)
+    private val _question = MutableLiveData<Question?>(null)
     val question: LiveData<Question?>
         get() = _question
-    private var _isAnswerCorrect = MutableLiveData<Boolean>(false)
+    private val _isAnswerCorrect = MutableLiveData<Boolean>(false)
     val isAnswerCorrect: LiveData<Boolean>
         get() = _isAnswerCorrect
-    private var _rightAnswers = MutableLiveData<Int>(0)
+    private val _rightAnswers = MutableLiveData<Int>(0)
     val rightAnswers: LiveData<Int>
         get() = _rightAnswers
-    private var _wrongAnswers = MutableLiveData<Int>(0)
+    private val _wrongAnswers = MutableLiveData<Int>(0)
     val wrongAnswers: LiveData<Int>
         get() = _wrongAnswers
 
