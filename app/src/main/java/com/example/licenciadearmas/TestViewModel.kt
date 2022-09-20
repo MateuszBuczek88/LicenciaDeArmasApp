@@ -3,6 +3,7 @@ package com.example.licenciadearmas
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.licenciadearmas.data.IQuestionRepository
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Sections
@@ -17,7 +18,7 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
     }
 
     fun getQuestions() {
-        MainScope().launch {
+        viewModelScope.launch {
 
             Sections.values().map { sections ->
                 async {
