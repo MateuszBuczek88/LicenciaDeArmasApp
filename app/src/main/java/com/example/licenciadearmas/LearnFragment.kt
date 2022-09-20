@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.fragment.navArgs
 import com.example.licenciadearmas.data.Question
-import com.example.licenciadearmas.data.Sections
+import com.example.licenciadearmas.data.Section
 import com.example.licenciadearmas.ui.theme.LicenciaDeArmasTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -26,7 +26,7 @@ import org.koin.core.parameter.parametersOf
 class LearnFragment : Fragment() {
     private val viewModel: LearnViewModel by viewModel { parametersOf(section) }
     private val navArgs: LearnFragmentArgs by navArgs()
-    private val section: Sections by lazy { navArgs.section }
+    private val section: Section by lazy { navArgs.section }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

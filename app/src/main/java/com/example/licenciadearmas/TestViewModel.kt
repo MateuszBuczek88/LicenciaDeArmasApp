@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.licenciadearmas.data.IQuestionRepository
 import com.example.licenciadearmas.data.Question
-import com.example.licenciadearmas.data.Sections
-import kotlinx.coroutines.MainScope
+import com.example.licenciadearmas.data.Section
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.awaitAll
@@ -20,9 +19,9 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
     fun getQuestions() {
         viewModelScope.launch {
 
-            Sections.values().map { sections ->
+            Section.values().map { sections ->
                 async {
-                    repository.getQuestionListFromLocalData(sections).map { it.shuffled().take(sections.toTest) }
+                    repository.getQuestionList(sections).map { it.shuffled().take(sections.toTest) }
                 }
             }
                 .awaitAll().let { resultList ->

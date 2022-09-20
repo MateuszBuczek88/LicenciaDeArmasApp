@@ -1,5 +1,5 @@
 package com.example.licenciadearmas.data
 
 interface ILocalDataSource {
-    suspend  fun getQuestionList(section: Sections):  Result<List<Question>>
+    suspend  fun getQuestionList(section: Section):  Result<List<Question>>
 }

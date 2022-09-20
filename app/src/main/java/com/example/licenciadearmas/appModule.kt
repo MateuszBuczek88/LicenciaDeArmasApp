@@ -25,7 +25,7 @@ val appModule = module {
         )
     }
 
-    viewModel { (section: Sections) ->
+    viewModel { (section: Section) ->
         LearnViewModel(repository = get(), section = section)
     }
     viewModel {

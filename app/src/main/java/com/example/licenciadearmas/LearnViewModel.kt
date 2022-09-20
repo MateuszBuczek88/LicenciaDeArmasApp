@@ -6,15 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.licenciadearmas.data.IQuestionRepository
 import com.example.licenciadearmas.data.Question
-import com.example.licenciadearmas.data.Sections
+import com.example.licenciadearmas.data.Section
 import kotlinx.coroutines.launch
 
-class LearnViewModel(val repository: IQuestionRepository, val section: Sections) : ViewModel() {
+class LearnViewModel(val repository: IQuestionRepository, val section: Section) : ViewModel() {
     lateinit var questionList: MutableList<Question>
     fun getQuestions() {
         viewModelScope.launch {
 
-            repository.getQuestionListFromLocalData(section).fold({
+            repository.getQuestionList(section).fold({
                 questionList = it.toMutableList()
                 _question.value = questionList.firstOrNull()
             }, { _loadError.value = true })

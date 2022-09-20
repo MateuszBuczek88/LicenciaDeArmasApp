@@ -3,7 +3,7 @@ package com.example.licenciadearmas.data
 import androidx.annotation.StringRes
 import com.example.licenciadearmas.R
 
-enum class Sections(
+enum class Section(
     @StringRes val descriptionResId: Int,
     @StringRes val nameResId: Int,
     val toTest: Int

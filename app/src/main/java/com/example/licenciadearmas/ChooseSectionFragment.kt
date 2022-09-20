@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.findNavController
-import com.example.licenciadearmas.data.Sections
+import com.example.licenciadearmas.data.Section
 
 class ChooseSectionFragment : Fragment() {
 
@@ -40,10 +40,10 @@ class ChooseSectionFragment : Fragment() {
 }
 
 @Composable
-fun ChooseSectionContent(sectionClick: (Sections) -> Unit) {
+fun ChooseSectionContent(sectionClick: (Section) -> Unit) {
 
     Column {
-        Sections.values().forEach {
+        Section.values().forEach {
             SectionCard(
                 onSectionClick = sectionClick,
                 section = it
@@ -56,8 +56,8 @@ fun ChooseSectionContent(sectionClick: (Sections) -> Unit) {
 
 @Composable
 fun SectionCard(
-    onSectionClick: (Sections) -> Unit,
-    section: Sections
+    onSectionClick: (Section) -> Unit,
+    section: Section
 ) {
     Row {
         Surface(

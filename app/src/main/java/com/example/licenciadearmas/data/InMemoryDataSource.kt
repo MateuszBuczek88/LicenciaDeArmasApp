@@ -10,15 +10,15 @@ class InMemoryDataSource(
     val questionsTema7: List<Question>
 ) : ILocalDataSource {
 
-    override suspend fun getQuestionList(section: Sections): Result<List<Question>> {
+    override suspend fun getQuestionList(section: Section): Result<List<Question>> {
         return when (section) {
-            Sections.Tema1 -> runCatching { questionsTema1 }
-            Sections.Tema2 -> runCatching { questionsTema2 }
-            Sections.Tema3 -> runCatching { questionsTema3 }
-            Sections.Tema4 -> runCatching { questionsTema4 }
-            Sections.Tema5 -> runCatching { questionsTema5 }
-            Sections.Tema6 -> runCatching { questionsTema6 }
-            Sections.Tema7 -> runCatching { questionsTema7 }
+            Section.Tema1 -> runCatching { questionsTema1 }
+            Section.Tema2 -> runCatching { questionsTema2 }
+            Section.Tema3 -> runCatching { questionsTema3 }
+            Section.Tema4 -> runCatching { questionsTema4 }
+            Section.Tema5 -> runCatching { questionsTema5 }
+            Section.Tema6 -> runCatching { questionsTema6 }
+            Section.Tema7 -> runCatching { questionsTema7 }
         }
     }
 }

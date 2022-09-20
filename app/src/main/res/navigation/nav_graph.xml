@@ -15,7 +15,7 @@
         android:label="LearnFragment" >
         <argument
             android:name="section"
-            app:argType="com.example.licenciadearmas.data.Sections" />
+            app:argType="com.example.licenciadearmas.data.Section" />
     </fragment>
     <fragment
         android:id="@+id/chooseSectionFragment"
