@@ -7,19 +7,26 @@ import androidx.lifecycle.viewModelScope
 import com.example.licenciadearmas.data.IQuestionRepository
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Section
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LearnViewModel(val repository: IQuestionRepository, val section: Section) : ViewModel() {
-    lateinit var questionList: MutableList<Question>
+    private var questionList: MutableList<Question> = mutableListOf()
     fun getQuestions() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = repository.getQuestionList(section)
 
-            repository.getQuestionList(section).fold({
-                questionList = it.toMutableList()
-                _question.value = questionList.firstOrNull()
-            }, { _loadError.value = true })
-
-            _isLoading.value = false
+            withContext(Dispatchers.Main) {
+                result.fold(onSuccess = {
+                    questionList = it.toMutableList()
+                    _question.value = questionList.firstOrNull()
+                }, onFailure = {
+                    _loadError.value = true
+                })
+                _isLoading.value = false
+            }
         }
     }
 
@@ -76,5 +83,9 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
             _question.value = questionList.first()
         }
         _showAnswer.value = false
+    }
+
+    init {
+        getQuestions()
     }
 }

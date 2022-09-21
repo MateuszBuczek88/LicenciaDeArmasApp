@@ -32,7 +32,7 @@ class LearnFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel.getQuestions()
+
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
