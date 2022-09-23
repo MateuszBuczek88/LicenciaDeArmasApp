@@ -68,18 +68,20 @@ class TestFragment : Fragment() {
                         }
                     } else {
 
-                                ResultScreen("Test Complete",
-                                    { findNavController().navigate(R.id.homeScreenFragment) },
-                                    { findNavController().navigate(R.id.testFragment) }
-                                )
-                            }
-                        }
+                        ResultScreen(message = stringResource(
+                            id = R.string.test_result_screen_message,
+                            rightAnswers!!,
+                            wrongAnswers!!
+                        ),
+                            { findNavController().navigate(R.id.homeScreenFragment) },
+                            { findNavController().navigate(R.id.testFragment) }
+                        )
                     }
                 }
             }
         }
-
-
+    }
+}
 
 
 @Composable
@@ -131,9 +133,9 @@ fun AnswersCard(answers: List<String>, onAnswerButtonClick: (String) -> Unit) {
 
 @Composable
 fun ResultScreen(
-    message:String,
+    message: String,
     navigateHome: () -> Unit,
-    playAgaing: () -> Unit
+    playAgain: () -> Unit
 ) {
     Surface {
         Column(
@@ -146,7 +148,7 @@ fun ResultScreen(
                 style = MaterialTheme.typography.body1
             )
 
-            Button(onClick = playAgaing) {
+            Button(onClick = playAgain) {
                 Text(text = stringResource(id = R.string.again_button_text))
             }
 

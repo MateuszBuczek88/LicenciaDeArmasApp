@@ -65,9 +65,9 @@ class LearnFragment : Fragment() {
 
                         } else {
                             ResultScreen(
-                                "All Questions Learned",
+                                message = stringResource(id = R.string.learn_result_screen_message),
                                 navigateHome = { findNavController().navigate(R.id.homeScreenFragment) },
-                                playAgaing = { findNavController().navigate(R.id.chooseSectionFragment) }
+                                playAgain = { findNavController().navigate(R.id.chooseSectionFragment) }
                             )
                         }
                     } else {
@@ -107,12 +107,12 @@ fun LearnContent(
 
                 Row {
                     Button(onClick = rightAnswer) {
-                        Text(text = "OK")
+                        Text(text = stringResource(id = R.string.button_know_answer_text))
                     }
                     Spacer(modifier = Modifier.width(20.dp))
 
                     Button(onClick = wrongAnswer) {
-                        Text(text = "WRONG")
+                        Text(text = stringResource(id = R.string.button_didnt_know_text))
                     }
                 }
             }
@@ -149,12 +149,16 @@ fun LoadingScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CircularProgressIndicator(strokeWidth = 5.dp, modifier = Modifier.size(80.dp, 80.dp))
-            Text(text = "Loading", style = MaterialTheme.typography.body1)
+            Text(
+                text = stringResource(id = R.string.loading_screen_message),
+                style = MaterialTheme.typography.body1
+            )
         }
     }
 }
+
 @Composable
-fun FailureLoadingQuestionsToast(){
+fun FailureLoadingQuestionsToast() {
     Toast.makeText(
         LocalContext.current,
         stringResource(id = R.string.failure_toast_message),

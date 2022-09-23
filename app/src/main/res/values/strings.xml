@@ -6,6 +6,8 @@
     <string name="test_button_text">Test</string>
     <string name="home_button_text">Home</string>
     <string name="again_button_text">Again</string>
+    <string name="button_know_answer_text">I knew</string>
+    <string name="button_didnt_know_text">I didnt know</string>
 
     <!-- Section name -->
     <string name="section_1_name">Section1</string>
@@ -27,4 +29,7 @@
 
     <!-- Messages -->
     <string name="failure_toast_message">Failure Loading Questions</string>
+    <string name="loading_screen_message">Loading</string>
+    <string name="learn_result_screen_message">All Questions Learned</string>
+    <string name="test_result_screen_message">Test complete!\n Right answers:%1$d\n Wrong answers:%2$d</string>
 </resources>
