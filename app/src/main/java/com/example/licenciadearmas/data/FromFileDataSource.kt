@@ -25,6 +25,6 @@ class FromFileDataSource(val filesIds: Map<Section, String>, val assetManager: A
         }
         val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val jsonAdapter: JsonAdapter<List<Question>> = moshi.adapter()
-        kotlin.runCatching { jsonAdapter.fromJson(json) ?: throw Exception("null Json") }
+        runCatching { json?.let { jsonAdapter.fromJson(it) } ?: throw Exception("null Json") }
     }
 }

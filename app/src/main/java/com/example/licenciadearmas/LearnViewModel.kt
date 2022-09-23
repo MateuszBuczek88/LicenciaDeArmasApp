@@ -8,9 +8,7 @@ import com.example.licenciadearmas.data.IQuestionRepository
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Section
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LearnViewModel(val repository: IQuestionRepository, val section: Section) : ViewModel() {
     private var questionList: MutableList<Question> = mutableListOf()

@@ -26,13 +26,21 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
                     }.fold({
                         testQuestionsList = it.toMutableList()
                         _question.value = testQuestionsList.firstOrNull()
+                        _isLoading.value = false
                     },
-                        { _loadError.value =true })
+                        {
+                            _loadError.value = true
+                            _isLoading.value = false
+                        })
                 }
         }
     }
 
-    lateinit var testQuestionsList: MutableList<Question>
+    private var testQuestionsList: MutableList<Question> = mutableListOf()
+
+    private val _isLoading = MutableLiveData(true)
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
 
     private val _loadError = MutableLiveData(false)
     val loadError: LiveData<Boolean>

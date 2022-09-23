@@ -20,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.example.licenciadearmas.data.Question
+import com.example.licenciadearmas.ui.theme.LicenciaDeArmasTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TestFragment : Fragment() {
@@ -32,21 +33,29 @@ class TestFragment : Fragment() {
 
         return ComposeView(requireContext()).apply {
             setContent {
+                LicenciaDeArmasTheme() {
 
-                val question by viewModel.question.observeAsState()
-                val isAnswerCorrect = viewModel.isAnswerCorrect.observeAsState(initial = false)
-                val rightAnswers by viewModel.rightAnswers.observeAsState()
-                val wrongAnswers = viewModel.wrongAnswers.observeAsState()
-                val loadError by viewModel.loadError.observeAsState()
-                Column {
-                    loadError?.let {
-                        TestContent(loadError= it, question = question,
-                            onAnswerButtonClick = { answer -> viewModel.checkAnswer(answer) })
+                    val question by viewModel.question.observeAsState()
+                    val isAnswerCorrect = viewModel.isAnswerCorrect.observeAsState(initial = false)
+                    val rightAnswers by viewModel.rightAnswers.observeAsState()
+                    val wrongAnswers = viewModel.wrongAnswers.observeAsState()
+                    val loadError by viewModel.loadError.observeAsState()
+                    val isLoading by viewModel.isLoading.observeAsState()
+
+                    if (isLoading != true) {
+                        Column {
+                            loadError?.let {
+                                TestContent(loadError = it, question = question,
+                                    onAnswerButtonClick = { answer -> viewModel.checkAnswer(answer) })
+                            }
+
+                            Text(text = isAnswerCorrect.toString())
+                            question?.let { Text(text = it.rightAnswer) }
+                            Text(text = "rightanswers:${rightAnswers}/wronganswers:${wrongAnswers.value}")
+                        }
+                    } else {
+                        LoadingScreen()
                     }
-
-                    Text(text = isAnswerCorrect.toString())
-                    question?.let { Text(text = it.rightAnswer) }
-                    Text(text = "rightanswers:${rightAnswers}/wronganswers:${wrongAnswers.value}")
                 }
             }
         }
@@ -104,3 +113,4 @@ fun AnswersCard(answers: List<String>, onAnswerButtonClick: (String) -> Unit) {
         }
     }
 }
+
