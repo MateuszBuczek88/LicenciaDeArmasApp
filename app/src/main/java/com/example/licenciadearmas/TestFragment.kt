@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
@@ -18,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -69,7 +68,7 @@ class TestFragment : Fragment() {
                         }
                     } else {
 
-                                ResultScreen("finished",
+                                ResultScreen("Test Complete",
                                     { findNavController().navigate(R.id.homeScreenFragment) },
                                     { findNavController().navigate(R.id.testFragment) }
                                 )
@@ -79,7 +78,7 @@ class TestFragment : Fragment() {
                 }
             }
         }
-    
+
 
 
 
@@ -90,11 +89,7 @@ fun TestContent(
     onAnswerButtonClick: (String) -> Unit
 ) {
     if (loadError) {
-        Toast.makeText(
-            LocalContext.current,
-            "Failure Loading Questions",
-            Toast.LENGTH_LONG
-        ).show()
+        FailureLoadingQuestionsToast()
     }
 
     question?.let {
@@ -152,11 +147,11 @@ fun ResultScreen(
             )
 
             Button(onClick = playAgaing) {
-                Text(text = "Again")
+                Text(text = stringResource(id = R.string.again_button_text))
             }
 
             Button(onClick = navigateHome) {
-                Text(text = "Home")
+                Text(text = stringResource(id = R.string.home_button_text))
             }
         }
     }

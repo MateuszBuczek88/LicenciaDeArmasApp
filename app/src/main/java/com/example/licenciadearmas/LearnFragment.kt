@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -94,11 +95,7 @@ fun LearnContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (loadError) {
-            Toast.makeText(
-                LocalContext.current,
-                "Failure Loading Questions",
-                Toast.LENGTH_LONG
-            ).show()
+            FailureLoadingQuestionsToast()
         }
         question?.let {
             QuestionCard(questionText = question.text, onQuestionClick = onQuestionClick)
@@ -155,4 +152,12 @@ fun LoadingScreen() {
             Text(text = "Loading", style = MaterialTheme.typography.body1)
         }
     }
+}
+@Composable
+fun FailureLoadingQuestionsToast(){
+    Toast.makeText(
+        LocalContext.current,
+        stringResource(id = R.string.failure_toast_message),
+        Toast.LENGTH_LONG
+    ).show()
 }
