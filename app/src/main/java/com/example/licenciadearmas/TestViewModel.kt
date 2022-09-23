@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
 
 
-    fun getQuestions() {
+    private fun getQuestions() {
         viewModelScope.launch {
 
             Section.values().map { sections ->
@@ -79,7 +79,7 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
         }
     }
 
-    fun nextQuestion() {
+    private fun nextQuestion() {
         testQuestionsList.removeFirstOrNull()
         if (testQuestionsList.isNotEmpty()) {
 

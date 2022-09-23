@@ -53,8 +53,6 @@ class LearnFragment : Fragment() {
                                     LearnContent(
                                         loadError = it1,
                                         question = question,
-                                        onNextClick = { viewModel.nextQuestion() },
-                                        onPrevClick = { viewModel.prevQuestion() },
                                         showButtons = showAnswer,
                                         onQuestionClick = { viewModel.showAnswer() },
                                         rightAnswer = { viewModel.rightAnswer() },
@@ -83,8 +81,6 @@ class LearnFragment : Fragment() {
 fun LearnContent(
     loadError: Boolean,
     question: Question?,
-    onNextClick: () -> Unit,
-    onPrevClick: () -> Unit,
     onQuestionClick: () -> Unit,
     showButtons: Boolean,
     rightAnswer: () -> Unit,
@@ -117,12 +113,6 @@ fun LearnContent(
                 }
             }
         }
-        Button(onClick = onNextClick) {
-            Text(text = "Next")
-        }
-        Button(onClick = onPrevClick) {
-            Text(text = "prev")
-        }
     }
 }
 
@@ -143,7 +133,7 @@ fun AnswerCard(answerText: String) {
 
 @Composable
 fun LoadingScreen() {
-    Surface() {
+    Surface {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally

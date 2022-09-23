@@ -12,23 +12,23 @@ import kotlinx.coroutines.launch
 
 class LearnViewModel(val repository: IQuestionRepository, val section: Section) : ViewModel() {
     private var questionList: MutableList<Question> = mutableListOf()
-    fun getQuestions() {
+    private fun getQuestions() {
         viewModelScope.launch(Dispatchers.Main) {
-             repository.getQuestionList(section).fold(onSuccess = {
-                    questionList = it.toMutableList()
-                    _question.value = questionList.firstOrNull()
-                }, onFailure = {
-                    _loadError.value = true
-                })
-                _isLoading.value = false
+            repository.getQuestionList(section).fold(onSuccess = {
+                questionList = it.toMutableList()
+                _question.value = questionList.firstOrNull()
+            }, onFailure = {
+                _loadError.value = true
+            })
+            _isLoading.value = false
         }
     }
 
-    private val _loadError = MutableLiveData<Boolean>(false)
+    private val _loadError = MutableLiveData(false)
     val loadError: LiveData<Boolean>
         get() = _loadError
 
-    private val _isLoading = MutableLiveData<Boolean>(true)
+    private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
@@ -40,21 +40,9 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
     val showAnswer: LiveData<Boolean>
         get() = _showAnswer
 
-    private val _showResult = MutableLiveData<Boolean>(false)
+    private val _showResult = MutableLiveData(false)
     val showResult: LiveData<Boolean>
         get() = _showResult
-
-    fun nextQuestion() {
-        _question.value?.let { questionList.add(it) }
-        questionList.removeFirst()
-        _question.value = questionList.first()
-    }
-
-    fun prevQuestion() {
-        _question.value = questionList.last()
-        question.value?.let { questionList.add(0, it) }
-        questionList.removeLast()
-    }
 
     fun showAnswer() {
         _showAnswer.value = true
