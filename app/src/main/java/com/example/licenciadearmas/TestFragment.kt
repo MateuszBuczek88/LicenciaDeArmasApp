@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
@@ -13,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
@@ -30,31 +32,42 @@ class TestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
         return ComposeView(requireContext()).apply {
             setContent {
-                LicenciaDeArmasTheme() {
+                LicenciaDeArmasTheme {
 
                     val question by viewModel.question.observeAsState()
-                    val isAnswerCorrect = viewModel.isAnswerCorrect.observeAsState(initial = false)
+                    val isAnswerCorrect =
+                        viewModel.isAnswerCorrect.observeAsState(initial = false)
                     val rightAnswers by viewModel.rightAnswers.observeAsState()
-                    val wrongAnswers = viewModel.wrongAnswers.observeAsState()
+                    val wrongAnswers by viewModel.wrongAnswers.observeAsState()
                     val loadError by viewModel.loadError.observeAsState()
                     val isLoading by viewModel.isLoading.observeAsState()
+                    val showResult by viewModel.showResult.observeAsState()
+                    if (showResult != true) {
+                        if (isLoading != true) {
+                            Column {
+                                loadError?.let {
+                                    TestContent(loadError = it, question = question,
+                                        onAnswerButtonClick = { answer ->
+                                            viewModel.checkAnswer(
+                                                answer
+                                            )
+                                        })
+                                }
 
-                    if (isLoading != true) {
-                        Column {
-                            loadError?.let {
-                                TestContent(loadError = it, question = question,
-                                    onAnswerButtonClick = { answer -> viewModel.checkAnswer(answer) })
+                                Text(text = isAnswerCorrect.toString(), color = Color.White)
+                                question?.let { Text(text = it.rightAnswer, color = Color.White) }
+                                Text(
+                                    text = "rightanswers:${rightAnswers}/wronganswers:${wrongAnswers}",
+                                    color = Color.White
+                                )
                             }
-
-                            Text(text = isAnswerCorrect.toString())
-                            question?.let { Text(text = it.rightAnswer) }
-                            Text(text = "rightanswers:${rightAnswers}/wronganswers:${wrongAnswers.value}")
+                        } else {
+                            LoadingScreen()
                         }
                     } else {
-                        LoadingScreen()
+                        rightAnswers?.let { wrongAnswers?.let { it1 -> ResultScreen(it, it1) } }
                     }
                 }
             }
@@ -109,6 +122,30 @@ fun AnswersCard(answers: List<String>, onAnswerButtonClick: (String) -> Unit) {
             }
             Button(onClick = { onAnswerButtonClick(it) }) {
                 Text(text = it)
+            }
+        }
+    }
+}
+
+@Composable
+fun ResultScreen(rightAnswers: Int, wrongAnswers: Int) {
+    Surface {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        )
+        {
+            Text(
+                text = "Right answers: $rightAnswers, wrong answers: $wrongAnswers",
+                style = MaterialTheme.typography.body1
+            )
+
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "Again")
+            }
+
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "Home")
             }
         }
     }

@@ -46,6 +46,10 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
     val loadError: LiveData<Boolean>
         get() = _loadError
 
+    private val _showResult = MutableLiveData(false)
+    val showResult: LiveData<Boolean>
+        get() = _showResult
+
     private val _question = MutableLiveData<Question?>(null)
     val question: LiveData<Question?>
         get() = _question
@@ -77,8 +81,12 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
 
     fun nextQuestion() {
         testQuestionsList.removeFirstOrNull()
-        _question.value = testQuestionsList.first()
-        _isAnswerCorrect.value = false
+        if (testQuestionsList.isNotEmpty()) {
+
+            _question.value = testQuestionsList.first()
+        } else {
+            _showResult.value = true
+        }
     }
 
     init {
