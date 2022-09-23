@@ -21,6 +21,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.ui.theme.LicenciaDeArmasTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -67,13 +68,19 @@ class TestFragment : Fragment() {
                             LoadingScreen()
                         }
                     } else {
-                        rightAnswers?.let { wrongAnswers?.let { it1 -> ResultScreen(it, it1) } }
+
+                                ResultScreen("finished",
+                                    { findNavController().navigate(R.id.homeScreenFragment) },
+                                    { findNavController().navigate(R.id.testFragment) }
+                                )
+                            }
+                        }
                     }
                 }
             }
         }
-    }
-}
+    
+
 
 
 @Composable
@@ -128,7 +135,11 @@ fun AnswersCard(answers: List<String>, onAnswerButtonClick: (String) -> Unit) {
 }
 
 @Composable
-fun ResultScreen(rightAnswers: Int, wrongAnswers: Int) {
+fun ResultScreen(
+    message:String,
+    navigateHome: () -> Unit,
+    playAgaing: () -> Unit
+) {
     Surface {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -136,15 +147,15 @@ fun ResultScreen(rightAnswers: Int, wrongAnswers: Int) {
         )
         {
             Text(
-                text = "Right answers: $rightAnswers, wrong answers: $wrongAnswers",
+                text = message,
                 style = MaterialTheme.typography.body1
             )
 
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = playAgaing) {
                 Text(text = "Again")
             }
 
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = navigateHome) {
                 Text(text = "Home")
             }
         }

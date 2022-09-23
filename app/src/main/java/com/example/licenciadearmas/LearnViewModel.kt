@@ -40,9 +40,9 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
     val showAnswer: LiveData<Boolean>
         get() = _showAnswer
 
-    private val _showCongrats = MutableLiveData<Boolean>(false)
-    val showCongrats: LiveData<Boolean>
-        get() = _showCongrats
+    private val _showResult = MutableLiveData<Boolean>(false)
+    val showResult: LiveData<Boolean>
+        get() = _showResult
 
     fun nextQuestion() {
         _question.value?.let { questionList.add(it) }
@@ -66,7 +66,7 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
             _question.value = questionList.first()
             _showAnswer.value = false
         } else {
-            _showCongrats.value = true
+            _showResult.value = true
         }
     }
 

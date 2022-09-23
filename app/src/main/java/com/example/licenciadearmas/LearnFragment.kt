@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Section
@@ -39,11 +40,11 @@ class LearnFragment : Fragment() {
                     val isLoading by viewModel.isLoading.observeAsState()
                     val question: Question? by viewModel.question.observeAsState()
                     val showAnswer by viewModel.showAnswer.observeAsState()
-                    val showCongrats by viewModel.showCongrats.observeAsState()
+                    val showResult by viewModel.showResult.observeAsState()
                     val loadError by viewModel.loadError.observeAsState()
 
                     if (isLoading != true) {
-                        if (showCongrats != true) {
+                        if (showResult != true) {
 
                             showAnswer?.let { showAnswer ->
 
@@ -62,7 +63,11 @@ class LearnFragment : Fragment() {
                             }
 
                         } else {
-                            AllQuestionsLearnedCard()
+                            ResultScreen(
+                                "All Questions Learned",
+                                navigateHome = { findNavController().navigate(R.id.homeScreenFragment) },
+                                playAgaing = { findNavController().navigate(R.id.chooseSectionFragment) }
+                            )
                         }
                     } else {
                         LoadingScreen()
@@ -138,25 +143,6 @@ fun AnswerCard(answerText: String) {
     }
 }
 
-@Composable
-fun AllQuestionsLearnedCard() {
-    Surface {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        )
-        {
-            Text(text = "Congrats", style = MaterialTheme.typography.body1)
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "Again")
-            }
-
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "Home")
-            }
-        }
-    }
-}
 
 @Composable
 fun LoadingScreen() {
