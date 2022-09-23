@@ -15,18 +15,14 @@ import kotlinx.coroutines.withContext
 class LearnViewModel(val repository: IQuestionRepository, val section: Section) : ViewModel() {
     private var questionList: MutableList<Question> = mutableListOf()
     fun getQuestions() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = repository.getQuestionList(section)
-
-            withContext(Dispatchers.Main) {
-                result.fold(onSuccess = {
+        viewModelScope.launch(Dispatchers.Main) {
+             repository.getQuestionList(section).fold(onSuccess = {
                     questionList = it.toMutableList()
                     _question.value = questionList.firstOrNull()
                 }, onFailure = {
                     _loadError.value = true
                 })
                 _isLoading.value = false
-            }
         }
     }
 

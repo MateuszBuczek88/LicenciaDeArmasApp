@@ -3,6 +3,7 @@ package com.example.licenciadearmas
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.licenciadearmas.data.IQuestionRepository
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Section
@@ -12,7 +13,7 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
 
 
     fun getQuestions() {
-        GlobalScope.launch {
+        viewModelScope.launch {
 
             Section.values().map { sections ->
                 async {
@@ -24,9 +25,9 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
                         resultList.flatMap { it.getOrThrow() }
                     }.fold({
                         testQuestionsList = it.toMutableList()
-                        _question.postValue(testQuestionsList.firstOrNull())
+                        _question.value = testQuestionsList.firstOrNull()
                     },
-                        { _loadError.value = true })
+                        { _loadError.value =true })
                 }
         }
     }

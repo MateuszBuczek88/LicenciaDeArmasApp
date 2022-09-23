@@ -5,6 +5,8 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 class FromFileDataSource(val filesIds: Map<Section, String>, val assetManager: AssetManager) :
@@ -15,7 +17,7 @@ class FromFileDataSource(val filesIds: Map<Section, String>, val assetManager: A
     }
 
     @OptIn(ExperimentalStdlibApi::class)
-    private fun readFile(section: Section): Result<List<Question>> {
+    private suspend  fun readFile(section: Section): Result<List<Question>> = withContext(Dispatchers.IO) {
         val json = filesIds.get(section)?.let {
             assetManager.open(it).bufferedReader().use {
                 it.readText()
@@ -23,6 +25,6 @@ class FromFileDataSource(val filesIds: Map<Section, String>, val assetManager: A
         }
         val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val jsonAdapter: JsonAdapter<List<Question>> = moshi.adapter()
-        return kotlin.runCatching { jsonAdapter.fromJson(json) ?: throw Exception("null Json") }
+        kotlin.runCatching { jsonAdapter.fromJson(json) ?: throw Exception("null Json") }
     }
 }
