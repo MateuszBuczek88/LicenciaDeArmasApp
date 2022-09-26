@@ -10,22 +10,43 @@
     <string name="button_didnt_know_text">I didnt know</string>
 
     <!-- Section name -->
-    <string name="section_1_name">Section1</string>
-    <string name="section_2_name">Section2</string>
-    <string name="section_3_name">Section3</string>
-    <string name="section_4_name">Section4</string>
-    <string name="section_5_name">Section5</string>
-    <string name="section_6_name">Section6</string>
-    <string name="section_7_name">Section7</string>
+    <string name="section_1_name">Tema 1</string>
+    <string name="section_2_name">Tema 2</string>
+    <string name="section_3_name">Tema 3</string>
+    <string name="section_4_name">Tema 4</string>
+    <string name="section_5_name">Tema 5</string>
+    <string name="section_6_name">Tema 6</string>
+    <string name="section_7_name">Tema 7</string>
 
     <!-- Section description -->
-    <string name="section_1_description">Section1 Descrtiption</string>
-    <string name="section_2_description">Section2 Descrtiption</string>
-    <string name="section_3_description">Section3 Descrtiption</string>
-    <string name="section_4_description">Section4 Descrtiption</string>
-    <string name="section_5_description">Section5 Descrtiption</string>
-    <string name="section_6_description">Section6 Descrtiption</string>
-    <string name="section_7_description">Section7 Descrtiption</string>
+    <string name="section_1_description">
+        \n\u2022 Funcionamiento de las armas.
+        \n\u2022 Piezas fundamentales y mecanismos de disparo y seguridad.
+        \n\u2022 Conservación y limpieza de las armas.
+        \n\u2022 Medidas de seguridad a adoptar en la tenencia de las armas.</string>
+    <string name="section_2_description">
+        \n\u2022 Categoría de las armas según el vigente Reglamento de Armas.
+        \n\u2022 Armas semiautomáticas, armas de repetición, armas prohibidas.</string>
+    <string name="section_3_description">
+        \n\u2022 Circulación de las armas.
+        \n\u2022 Revista de armas.
+        \n\u2022 Transferencia de armas.</string>
+    <string name="section_4_description">
+        \n\u2022 Documentación para la tenencia y uso de armas.
+        \n\u2022 Condiciones generales para la obtención de licencias y Tarjeta Europea de Armas de Fuego.
+        \n\u2022 Trámite de las solicitudes.</string>
+    <string name="section_5_description">
+        \n\u2022 Régimen sancionador.
+        \n\u2022 Infracciones muy graves, graves y leves.
+        \n\u2022 Retirada de las armas.</string>
+    <string name="section_6_description">
+        \n\u2022 Reparación de armas.
+        \n\u2022 Prueba de armas.
+        \n\u2022 Depósito de armas.</string>
+    <string name="section_7_description">
+        \n\u2022 Armas de colección.
+        \n\u2022 Definiciones del Art. 2 del Reglamento de Armas y Art. 107.
+        \n\u2022 Historia de las armas de fuego, calibres, munición y pólvora.</string>
 
     <!-- Messages -->
     <string name="failure_toast_message">Failure Loading Questions</string>
@@ -34,4 +55,5 @@
     <string name="test_result_screen_message">Test complete!\n Right answers:%1$d\n Wrong answers:%2$d</string>
     <string name="home_screen_main_text">Licencia de Armas</string>
     <string name="home_screen_secondary_text">Learn and test yourself!</string>
+    <string name="choosesection_screen_main_text">Choose section:</string>
 </resources>
