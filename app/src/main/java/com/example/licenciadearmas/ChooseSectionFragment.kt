@@ -30,7 +30,7 @@ class ChooseSectionFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
-                    ChooseSectionContentLazy { section ->
+                    ChooseSectionContent { section ->
                         findNavController().navigate(
                             ChooseSectionFragmentDirections.actionChooseSectionFragmentToLearnFragment(
                                 section
@@ -45,20 +45,6 @@ class ChooseSectionFragment : Fragment() {
 
 @Composable
 fun ChooseSectionContent(sectionClick: (Section) -> Unit) {
-    Surface() {
-        Column(modifier = Modifier.padding(12.dp)) {
-            Section.values().forEach {
-                SectionCard(
-                    onSectionClick = sectionClick,
-                    section = it
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-            }
-        }
-    }
-}
-@Composable
-fun ChooseSectionContentLazy(sectionClick: (Section) -> Unit) {
     Surface {
         Column(modifier=Modifier.padding(5.dp)) {
             SecondaryText(textRes = R.string.choosesection_screen_main_text)

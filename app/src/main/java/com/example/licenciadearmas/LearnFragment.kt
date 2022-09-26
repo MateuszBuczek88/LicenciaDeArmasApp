@@ -165,7 +165,7 @@ fun LoadingScreen() {
             CircularProgressIndicator(strokeWidth = 5.dp, modifier = Modifier.size(80.dp, 80.dp))
             Text(
                 text = stringResource(id = R.string.loading_screen_message),
-                style = MaterialTheme.typography.body1
+                fontSize = 18.sp
             )
         }
     }

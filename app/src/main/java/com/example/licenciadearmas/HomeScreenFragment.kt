@@ -95,9 +95,6 @@ fun HomeScreenButton(text: String, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         shape = Shapes.small,
-        colors = ButtonDefaults.buttonColors(
-            colorResource(id = R.color.primaryLightColor)
-        ),
         elevation = ButtonDefaults.elevation(
             defaultElevation = 6.dp,
             pressedElevation = 8.dp,
