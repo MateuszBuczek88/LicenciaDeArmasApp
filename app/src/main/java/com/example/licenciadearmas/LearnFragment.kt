@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.licenciadearmas.data.Question
@@ -86,29 +88,47 @@ fun LearnContent(
     rightAnswer: () -> Unit,
     wrongAnswer: () -> Unit
 ) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        if (loadError) {
-            FailureLoadingQuestionsToast()
-        }
-        question?.let {
-            QuestionCard(questionText = question.text, onQuestionClick = onQuestionClick)
-            Spacer(modifier = Modifier.height(20.dp))
-
-            if (showButtons) {
-                AnswerCard(answerText = question.rightAnswer)
+    Surface {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(8.dp)
+        ) {
+            if (loadError) {
+                FailureLoadingQuestionsToast()
+            }
+            question?.let {
+                QuestionCard(questionText = question.text, onQuestionClick = onQuestionClick)
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Row {
-                    Button(onClick = rightAnswer) {
-                        Text(text = stringResource(id = R.string.button_know_answer_text))
-                    }
-                    Spacer(modifier = Modifier.width(20.dp))
+                if (showButtons) {
+                    AnswerCard(answerText = question.rightAnswer)
+                    Spacer(modifier = Modifier.height(20.dp))
 
-                    Button(onClick = wrongAnswer) {
-                        Text(text = stringResource(id = R.string.button_didnt_know_text))
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Button(
+                            onClick = rightAnswer, elevation = ButtonDefaults.elevation(
+                                defaultElevation = 6.dp,
+                                pressedElevation = 8.dp,
+                                disabledElevation = 0.dp
+                            ), modifier = Modifier.weight(2f)
+                        ) {
+                            Text(text = stringResource(id = R.string.button_know_answer_text))
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
+
+                        Button(
+                            onClick = wrongAnswer, elevation = ButtonDefaults.elevation(
+                                defaultElevation = 6.dp,
+                                pressedElevation = 8.dp,
+                                disabledElevation = 0.dp
+                            ), modifier = Modifier.weight(2f)
+                        ) {
+                            Text(text = stringResource(id = R.string.button_didnt_know_text))
+                        }
                     }
                 }
             }
@@ -118,15 +138,19 @@ fun LearnContent(
 
 @Composable
 fun QuestionCard(questionText: String, onQuestionClick: () -> Unit) {
-    Surface(modifier = Modifier.clickable(onClick = onQuestionClick)) {
-        Text(text = questionText)
+    Surface(
+        modifier = Modifier.clickable(onClick = onQuestionClick),
+        elevation = 12.dp,
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Text(text = questionText, modifier = Modifier.padding(8.dp), fontSize = 18.sp)
     }
 }
 
 @Composable
 fun AnswerCard(answerText: String) {
     Surface {
-        Text(text = answerText)
+        Text(text = answerText, style = MaterialTheme.typography.body2, fontSize = 18.sp)
     }
 }
 

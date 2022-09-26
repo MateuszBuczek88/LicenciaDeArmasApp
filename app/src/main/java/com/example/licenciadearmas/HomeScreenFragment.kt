@@ -58,9 +58,9 @@ fun HomeScreenContent(
             Spacer(modifier = Modifier.height(25.dp))
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                HomeScreenMainText(textRes = R.string.home_screen_main_text)
+                MainText(textRes = R.string.home_screen_main_text)
 
-                HomeScreenSecondaryText(textRes = R.string.home_screen_secondary_text)
+                SecondaryText(textRes = R.string.home_screen_secondary_text)
                 Spacer(modifier = Modifier.weight(1f))
 
                 HomeScreenImage(imageRes = R.color.primaryDarkColor)
@@ -129,13 +129,13 @@ fun HomeScreenImage(imageRes: Int) {
 }
 
 @Composable
-fun HomeScreenMainText(textRes: Int) {
+fun MainText(textRes: Int) {
     Text(text = stringResource(id = textRes), fontSize = 40.sp)
     Spacer(modifier = Modifier.height(15.dp))
 }
 
 @Composable
-fun HomeScreenSecondaryText(textRes: Int) {
+fun SecondaryText(textRes: Int) {
     Text(
         text = stringResource(id = textRes),
         fontSize = 24.sp,
