@@ -98,7 +98,7 @@ fun LearnContent(
                 FailureLoadingQuestionsToast()
             }
             question?.let {
-                QuestionCard(questionText = question.text, onQuestionClick = onQuestionClick)
+                QuestionCard(question = question, onQuestionClick = onQuestionClick)
                 Spacer(modifier = Modifier.height(20.dp))
 
                 if (showButtons) {
@@ -137,13 +137,21 @@ fun LearnContent(
 }
 
 @Composable
-fun QuestionCard(questionText: String, onQuestionClick: () -> Unit) {
+fun QuestionCard(question: Question, onQuestionClick: () -> Unit) {
     Surface(
         modifier = Modifier.clickable(onClick = onQuestionClick),
         elevation = 12.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
-        Text(text = questionText, modifier = Modifier.padding(8.dp), fontSize = 18.sp)
+        Column {
+            Text(text = question.text, modifier = Modifier.padding(8.dp), fontSize = 18.sp)
+            Text(
+                text = question.answersList.joinToString(separator = "\n"),
+                modifier = Modifier.padding(8.dp),
+                fontSize = 18.sp,
+                lineHeight = 30.sp
+            )
+        }
     }
 }
 

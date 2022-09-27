@@ -20,31 +20,31 @@
 
     <!-- Section description -->
     <string name="section_1_description">
-        \n\u2022 Funcionamiento de las armas.
+        \u2022 Funcionamiento de las armas.
         \n\u2022 Piezas fundamentales y mecanismos de disparo y seguridad.
         \n\u2022 Conservación y limpieza de las armas.
         \n\u2022 Medidas de seguridad a adoptar en la tenencia de las armas.</string>
     <string name="section_2_description">
-        \n\u2022 Categoría de las armas según el vigente Reglamento de Armas.
+        \u2022 Categoría de las armas según el vigente Reglamento de Armas.
         \n\u2022 Armas semiautomáticas, armas de repetición, armas prohibidas.</string>
     <string name="section_3_description">
-        \n\u2022 Circulación de las armas.
+        \u2022 Circulación de las armas.
         \n\u2022 Revista de armas.
         \n\u2022 Transferencia de armas.</string>
     <string name="section_4_description">
-        \n\u2022 Documentación para la tenencia y uso de armas.
+        \u2022 Documentación para la tenencia y uso de armas.
         \n\u2022 Condiciones generales para la obtención de licencias y Tarjeta Europea de Armas de Fuego.
         \n\u2022 Trámite de las solicitudes.</string>
     <string name="section_5_description">
-        \n\u2022 Régimen sancionador.
+        \u2022 Régimen sancionador.
         \n\u2022 Infracciones muy graves, graves y leves.
         \n\u2022 Retirada de las armas.</string>
     <string name="section_6_description">
-        \n\u2022 Reparación de armas.
+        \u2022 Reparación de armas.
         \n\u2022 Prueba de armas.
         \n\u2022 Depósito de armas.</string>
     <string name="section_7_description">
-        \n\u2022 Armas de colección.
+        \u2022 Armas de colección.
         \n\u2022 Definiciones del Art. 2 del Reglamento de Armas y Art. 107.
         \n\u2022 Historia de las armas de fuego, calibres, munición y pólvora.</string>
 

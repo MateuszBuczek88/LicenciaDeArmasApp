@@ -22,7 +22,7 @@ val Typography = Typography(
     body2 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
+        fontSize = 14.sp
     ),
     button = TextStyle(
         fontFamily = robotoFont,
