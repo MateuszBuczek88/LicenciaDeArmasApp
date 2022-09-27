@@ -26,6 +26,7 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
                     }.fold({
                         testQuestionsList = it.toMutableList()
                         _question.value = testQuestionsList.firstOrNull()
+                        _questionsLeft.value = testQuestionsList.size
                         _isLoading.value = false
                     },
                         {
@@ -37,6 +38,10 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
     }
 
     private var testQuestionsList: MutableList<Question> = mutableListOf()
+
+    private val _questionsLeft = MutableLiveData(0)
+    val questionsLeft: LiveData<Int>
+        get() = _questionsLeft
 
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean>
@@ -54,10 +59,6 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
     val question: LiveData<Question?>
         get() = _question
 
-    private val _isAnswerCorrect = MutableLiveData(false)
-    val isAnswerCorrect: LiveData<Boolean>
-        get() = _isAnswerCorrect
-
     private val _rightAnswers = MutableLiveData(0)
     val rightAnswers: LiveData<Int>
         get() = _rightAnswers
@@ -68,7 +69,6 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
 
     fun checkAnswer(userAnswer: String) {
         if (question.value?.rightAnswer == userAnswer) {
-            _isAnswerCorrect.value = true
             _rightAnswers.value = _rightAnswers.value?.plus(1)
             nextQuestion()
 
@@ -81,6 +81,7 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
 
     private fun nextQuestion() {
         testQuestionsList.removeFirstOrNull()
+        _questionsLeft.value = testQuestionsList.size
         if (testQuestionsList.isNotEmpty()) {
 
             _question.value = testQuestionsList.first()

@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -35,32 +35,24 @@ class TestFragment : Fragment() {
                 LicenciaDeArmasTheme {
 
                     val question by viewModel.question.observeAsState()
-                    val isAnswerCorrect =
-                        viewModel.isAnswerCorrect.observeAsState(initial = false)
                     val rightAnswers by viewModel.rightAnswers.observeAsState()
                     val wrongAnswers by viewModel.wrongAnswers.observeAsState()
                     val loadError by viewModel.loadError.observeAsState()
                     val isLoading by viewModel.isLoading.observeAsState()
                     val showResult by viewModel.showResult.observeAsState()
+                    val questionsLeft by viewModel.questionsLeft.observeAsState()
                     if (showResult != true) {
                         if (isLoading != true) {
-                            Column {
-                                loadError?.let {
-                                    TestContent(loadError = it, question = question,
+
+                            loadError?.let {
+                                questionsLeft?.let { questionsLeft ->
+                                    TestContent(loadError = it, question = question, questionsLeft = questionsLeft,
                                         onAnswerButtonClick = { answer ->
-                                            viewModel.checkAnswer(
-                                                answer
-                                            )
+                                            viewModel.checkAnswer(answer)
                                         })
                                 }
-
-                                Text(text = isAnswerCorrect.toString(), color = Color.White)
-                                question?.let { Text(text = it.rightAnswer, color = Color.White) }
-                                Text(
-                                    text = "rightanswers:${rightAnswers}/wronganswers:${wrongAnswers}",
-                                    color = Color.White
-                                )
                             }
+
                         } else {
                             LoadingScreen()
                         }
@@ -84,6 +76,7 @@ class TestFragment : Fragment() {
 
 @Composable
 fun TestContent(
+    questionsLeft:Int,
     loadError: Boolean,
     question: Question?,
     onAnswerButtonClick: (String) -> Unit
@@ -93,18 +86,32 @@ fun TestContent(
     }
 
     question?.let {
-        Column {
-
-            QuestionCard(questionText = question.text)
-            AnswersCard(answers = question.answersList, onAnswerButtonClick = onAnswerButtonClick)
+        Surface {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Text(text = stringResource(id = R.string.questions_left, questionsLeft), fontSize = 24.sp )
+                Spacer(modifier = Modifier.height(25.dp))
+                QuestionCard(questionText = question.text)
+                Spacer(modifier = Modifier.height(20.dp))
+                AnswersCard(
+                    answers = question.answersList,
+                    onAnswerButtonClick = onAnswerButtonClick
+                )
+            }
         }
     }
 }
 
 @Composable
 fun QuestionCard(questionText: String) {
-    Surface {
-        Text(text = questionText)
+    Surface(
+        elevation = 12.dp,
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Text(text = questionText, modifier = Modifier.padding(8.dp), fontSize = 18.sp)
     }
 }
 
@@ -114,18 +121,20 @@ fun AnswersCard(answers: List<String>, onAnswerButtonClick: (String) -> Unit) {
 
         answers.forEach {
 
-            Surface(
-                shape = MaterialTheme.shapes.small,
-                elevation = 1.dp,
-                color = Color.White,
-                modifier = Modifier
+            Button(
+                onClick = { onAnswerButtonClick(it) },
+                modifier = Modifier.fillMaxWidth(0.95f),
+                elevation = ButtonDefaults.elevation(
+                    defaultElevation = 6.dp,
+                    pressedElevation = 8.dp,
+                    disabledElevation = 0.dp
+                )
             ) {
-                Text(text = it)
+                Text(text = it, Modifier.fillMaxWidth(), textAlign = TextAlign.Left)
             }
-            Button(onClick = { onAnswerButtonClick(it) }) {
-                Text(text = it)
-            }
+            Spacer(modifier = Modifier.height(8.dp))
         }
+
     }
 }
 
@@ -147,23 +156,27 @@ fun ResultScreen(
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(20.dp))
-            Button(onClick = playAgain,
+            Button(
+                onClick = playAgain,
                 modifier = Modifier.fillMaxWidth(0.85f),
                 elevation = ButtonDefaults.elevation(
                     defaultElevation = 6.dp,
                     pressedElevation = 8.dp,
                     disabledElevation = 0.dp
-                )) {
+                )
+            ) {
                 Text(text = stringResource(id = R.string.again_button_text))
             }
             Spacer(modifier = Modifier.height(20.dp))
-            Button(onClick = navigateHome,
+            Button(
+                onClick = navigateHome,
                 modifier = Modifier.fillMaxWidth(0.85f),
                 elevation = ButtonDefaults.elevation(
                     defaultElevation = 6.dp,
                     pressedElevation = 8.dp,
                     disabledElevation = 0.dp
-                )) {
+                )
+            ) {
                 Text(text = stringResource(id = R.string.home_button_text))
             }
         }

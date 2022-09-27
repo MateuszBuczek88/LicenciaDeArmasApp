@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LicenciaDeArmas</string>
+    <string name="app_name">Licencia De Armas</string>
 
     <!-- Buttons -->
     <string name="learn_button_text">Learn</string>
@@ -56,4 +56,5 @@
     <string name="home_screen_main_text">Licencia de Armas</string>
     <string name="home_screen_secondary_text">Learn and test yourself!</string>
     <string name="choosesection_screen_main_text">Choose section:</string>
+    <string name="questions_left">Questions left: %1$d</string>
 </resources>
