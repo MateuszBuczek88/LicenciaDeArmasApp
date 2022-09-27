@@ -1,38 +1,614 @@
 [
-   {
-      "text":"11 El arma de fuego que se recarga automáticamente, después de cada disparo, efectuando varios disparos sucesivos accionando el disparador una sola vez, se denomina:",
-      "answersList":[
-         "A).-Arma de fuego semiautomática",
-         "B).-Arma de fuego de repetición",
-         "C).-Arma de fuego automática"
-      ],
-      "rightAnswer":"C).-Arma de fuego automática"
-   },
-   {
-      "text":"12 Si el arma de fuego se recarga después de cada disparo, mediante un mecanismo accionado por el tirador,\nestaremos ante:",
-      "answersList":[
-         "A).-Arma de fuego semiautomática",
-         "B).-Arma de fuego de repetición.",
-         "C).-Arma de fuego automática"
-      ],
-      "rightAnswer":"B).-Arma de fuego de repetición."
-   },
-   {
-      "text":"13 El arma de fuego que se recarga automáticamente, después de cada disparo, efectuando varios disparos sucesivos accionando el disparador una sola vez, se denomina:",
-      "answersList":[
-         "A).-Arma de fuego semiautomática",
-         "B).-Arma de fuego de repetición",
-         "C).-Arma de fuego automática"
-      ],
-      "rightAnswer":"C).-Arma de fuego automática"
-   },
-   {
-      "text":"14 El arma de fuego que se recarga automáticamente, después de cada disparo, efectuando varios disparos sucesivos accionando el disparador una sola vez, se denomina:",
-      "answersList":[
-         "A).-Arma de fuego semiautomática",
-         "B).-Arma de fuego de repetición",
-         "C).-Arma de fuego automática"
-      ],
-      "rightAnswer":"C).-Arma de fuego automática"
-   }
+  {
+    "text": "1. El arma de fuego que se recarga automáticamente, después de cada disparo, efectuando varios disparos sucesivos accionando el disparador una sola vez, se denomina:",
+    "answersList": [
+      "A).-Arma de fuego semiautomática.",
+      "B).-Arma de fuego de repetición.",
+      "C).-Arma de fuego automática."
+    ],
+    "rightAnswer": "C).-Arma de fuego automática."
+  },
+  {
+    "text": "2. El arma de fuego que después de cada disparo, se recarga automáticamente y solo es posible efectuar un disparo al accionar el disparador cada vez, se denomina:",
+    "answersList": [
+      "A).-Arma de fuego semiautomática.",
+      "B).-Arma de fuego de repetición.",
+      "C).-Arma de fuego automática."
+    ],
+    "rightAnswer": "A).-Arma de fuego semiautomática."
+  },
+  {
+    "text": "3. Si el arma de fuego se recarga después de cada disparo, mediante un mecanismo accionado por el tirador,\nestaremos ante:",
+    "answersList": [
+      "A).-Arma de fuego semiautomática.",
+      "B).-Arma de fuego de repetición.",
+      "C).-Arma de fuego automática."
+    ],
+    "rightAnswer": "B).-Arma de fuego de repetición."
+  },
+  {
+    "text": "4. ¿Cómo se denomina el arma de fuego sin depósito de municiones, que se carga antes de cada disparo\nmediante la introducción manual de un cartucho en la recámara, o alojamiento especial a la entrada del\ncañón?:",
+    "answersList": [
+      "A).- Arma de un solo tiro.",
+      "B).-Arma de fuego automática.",
+      "C).-Arma de fuego semiautomática."
+    ],
+    "rightAnswer": "A).- Arma de un solo tiro."
+  },
+  {
+    "text": "5. ¿Qué elemento de un arma de fuego conduce y estabiliza el proyectil?.",
+    "answersList": [
+      "A).- El disparador.",
+      "B).- El cañón.",
+      "C).- El estabilizador."
+    ],
+    "rightAnswer": "B).- El cañón."
+  },
+  {
+    "text": ":6. La culata de un arma sirve para:",
+    "answersList": [
+      "A).- Instalar en ella el punto de mira.",
+      "B).- Apoyar el arma sobre el hombro para efectuar el disparo.",
+      "C).- Las armas no tienen culata."
+    ],
+    "rightAnswer": "B).- Apoyar el arma sobre el hombro para efectuar el disparo."
+  },
+  {
+    "text": "7. Las ánimas de los cañones de escopetas son:",
+    "answersList": [
+      "A).- Estriadas.",
+      "B).- Lisas o estriadas.",
+      "C).- Con rayas paralelas."
+    ],
+    "rightAnswer": "B).- Lisas o estriadas."
+  },
+  {
+    "text": "8. Las ánimas de los cañones de un rifle son:",
+    "answersList": [
+      "A).- Lisas.",
+      "B).- Estriadas",
+      "C).- Cajón de los mecanismos."
+    ],
+    "rightAnswer": "B).- Estriadas"
+  },
+  {
+    "text": "9. En una escopeta semiautomática, el percutor, extractor y grapón, son piezas que componen:",
+    "answersList": [
+      "A).- Cerrojo",
+      "B).- Culata",
+      "C).- Estriadas o lisas, dependiendo del fabricante."
+    ],
+    "rightAnswer": "A).- Cerrojo"
+  },
+  {
+    "text": "10. ¿Qué pieza o piezas protege el guardamonte?.",
+    "answersList": [
+      "A).- La biela y el fiador.",
+      "B).- El disparador.",
+      "C).- Es macizo."
+    ],
+    "rightAnswer": "B).- El disparador."
+  },
+  {
+    "text": "11. ¿Qué misión tiene el muelle del cargador de un rifle? ",
+    "answersList": [
+      "A).-Mantener presión en los cartuchos.",
+      "B).-Expulsar la vaina cuando se produce el disparo",
+      "C).-Elevar el cartucho y colocarlo frente a la recámara."
+    ],
+    "rightAnswer": "C).-Elevar el cartucho y colocarlo frente a la recámara."
+  },
+  {
+    "text": "12. En un arma semiautomática, ¿qué pieza introduce el cartucho en el interior de la recámara?",
+    "answersList": [
+      "A).-El cierre.",
+      "B).-El muelle elevador.",
+      "C).-La biela."
+    ],
+    "rightAnswer": "A).-El cierre."
+  },
+  {
+    "text": "13. En escopetas superpuestas, ¿qué misión tiene la banda intermedia ventilada, existente entre los\ncañones?.",
+    "answersList": [
+      "A).-Refrigerar los cañones.",
+      "B).-Amortiguar el efecto de los vientos laterales.",
+      "C).-Las dos anteriores."
+    ],
+    "rightAnswer": "C).-Las dos anteriores."
+  },
+  {
+    "text": "14. ¿Qué mecanismo se encuentra en el interior del cerrojo de un rifle?.",
+    "answersList": [
+      "A).-Mecanismo de percusión.",
+      "B).-Mecanismo de disparo.",
+      "C).-Mecanismo de expulsión."
+    ],
+    "rightAnswer": "A).-Mecanismo de percusión."
+  },
+  {
+    "text": "15. ¿De qué partes se compone el mecanismo de percusión?",
+    "answersList": [
+      "A).-Percutor y muelle del percutor.",
+      "B).-Percutor y cabeza del cierre.",
+      "C).-Cabeza y punta del percutor."
+    ],
+    "rightAnswer": "A).-Percutor y muelle del percutor."
+  },
+  {
+    "text": "16. En un rifle, ¿qué pieza arrastra el cartucho hacia la recámara?.",
+    "answersList": [
+      "A).-El cerrojo.",
+      "B).-El elevador.",
+      "C).-El percutor."
+    ],
+    "rightAnswer": "A).-El cerrojo."
+  },
+  {
+    "text": "17. Para la expulsión del cartucho, ¿qué pieza engarza el culote del cartucho cuándo está alojado en la\nrecámara?.",
+    "answersList": [
+      "A).-Cerrojo.",
+      "B).-Tope de cerrojo.",
+      "C).-Uña extractora."
+    ],
+    "rightAnswer": "C).-Uña extractora."
+  },
+  {
+    "text": "18. En un rifle, ¿qué pieza expulsa la vaina del cartucho de la recámara?",
+    "answersList": [
+      "A).-No hay pieza, es la propia mano del tirador.",
+      "B).-El muelle de recuperación.",
+      "C).-El extractor."
+    ],
+    "rightAnswer": "C).-El extractor."
+  },
+  {
+    "text": "19. El choke de una escopeta consiste en:",
+    "answersList": [
+      "A).- El estriado de la boca de fuego.",
+      "B).- Reducción de la boca de recámara.",
+      "C).- Estrangulamiento de la boca de fuego."
+    ],
+    "rightAnswer": "C).- Estrangulamiento de la boca de fuego."
+  },
+  {
+    "text": "20. El choke en el rifle semiautomático consiste :",
+    "answersList": [
+      "A).- El estriado de la boca de fuego.",
+      "B).- Reducción de la boca de fuego.",
+      "C).- Carecen de choke."
+    ],
+    "rightAnswer": "C).- Carecen de choke."
+  },
+  {
+    "text": "21. ¿A qué se denominan extractores en una escopeta superpuesta?:",
+    "answersList": [
+      "A).- Dos uñas que sirven para desalojar los cartuchos de su recámara",
+      "B).- A sendas bielas que conectan el disparador con las agujas percutoras.",
+      "C).- Dos muelles planos de acción helicoidal."
+    ],
+    "rightAnswer": "A).- Dos uñas que sirven para desalojar los cartuchos de su recámara"
+  },
+  {
+    "text": "22. En un arma larga rayada, ¿qué forma tiene la recámara?",
+    "answersList": [
+      "A).- La del proyectil.",
+      "B).- La de la vaina.",
+      "C).- La del cartucho."
+    ],
+    "rightAnswer": "C).- La del cartucho."
+  },
+  {
+    "text": "23. En las armas largas rayadas de caza mayor, ¿cómo es la percusión?",
+    "answersList": [
+      "A).- Percusión central",
+      "B).- Percusión adelantada.",
+      "C).- Sistema “Flobert”."
+    ],
+    "rightAnswer": "A).- Percusión central"
+  },
+  {
+    "text": "24. ¿Qué dispositivo bloquea el funcionamiento del mecanismo de disparo a voluntad del tirador?",
+    "answersList": [
+      "A).- Elementos de Puntería",
+      "B).- Nada",
+      "C).- Seguro manual."
+    ],
+    "rightAnswer": "C).- Seguro manual."
+  },
+  {
+    "text": "25. ¿Cómo se denomina el extremo del cañón de una escopeta opuesto a la parte en que se aloja el cartucho?",
+    "answersList": [
+      "A).- Boca",
+      "B).- Cámara",
+      "C).- Recámara"
+    ],
+    "rightAnswer": "A).- Boca"
+  },
+  {
+    "text": "26. ¿Cuándo decimos que una arma esta montada?.",
+    "answersList": [
+      "A).- Cuando esta preparada para hacer fuego.",
+      "B).- Que está totalmente ensamblada.",
+      "C).- Ser portada por el tirador."
+    ],
+    "rightAnswer": "A).- Cuando esta preparada para hacer fuego."
+  },
+  {
+    "text": "27. Arma alimentada es aquella que:",
+    "answersList": [
+      "A).- Tiene la munición alojada en el mecanismo de alimentación.",
+      "B).- Ya ha efectuado el disparo.",
+      "C).- No tiene munición en el mecanismo de alimentación."
+    ],
+    "rightAnswer": "A).- Tiene la munición alojada en el mecanismo de alimentación."
+  },
+  {
+    "text": "28. Arma montada es aquella que:",
+    "answersList": [
+      "A).- El mecanismo de disparo y percusión se encuentra en disposición de funcionamiento.",
+      "B).- Está ensamblada y pavonada.",
+      "C).- Está ensamblada pero no pavonada."
+    ],
+    "rightAnswer": "A).- El mecanismo de disparo y percusión se encuentra en disposición de funcionamiento."
+  },
+  {
+    "text": "29. ¿Dónde se aloja el cartucho de un arma para ser disparado?.",
+    "answersList": [
+      "A).- En el cargador.",
+      "B).- En la recámara.",
+      "C).- En la canana."
+    ],
+    "rightAnswer": "B).- En la recámara."
+  },
+  {
+    "text": "30. ¿Por dónde expulsa una escopeta semiautomática el cartucho disparado?",
+    "answersList": [
+      "A).- Por la ventana trasera del arma.",
+      "B).- Por la ventana de ventilación.",
+      "C).- Por la ventana de expulsión."
+    ],
+    "rightAnswer": "C).- Por la ventana de expulsión."
+  },
+  {
+    "text": "31. Para alimentar una escopeta semiautomática debemos:",
+    "answersList": [
+      "A).- Introducir los cartuchos en la recámara.",
+      "B).-Colocar los cartuchos en el depósito.",
+      "C).- Montar el arma."
+    ],
+    "rightAnswer": "B).-Colocar los cartuchos en el depósito."
+  },
+  {
+    "text": "32. ¿Qué diferencia existe entre cargar y alimentar un arma.?",
+    "answersList": [
+      "A).-Cargar es montarla para disparar, alimentarla introducir cartuchos en el depósito",
+      "B).-Cargar es introducir cartuchos en el deposito, alimentarla es montarla para disparar.",
+      "C).- No existe diferencia."
+    ],
+    "rightAnswer": "A).-Cargar es montarla para disparar, alimentarla introducir cartuchos en el depósito"
+  },
+  {
+    "text": "33. ¿Puede darse el caso de que además de los extractores, las escopetas superpuestas dispongan de expulsores?",
+    "answersList": [
+      "A).- Todas",
+      "B).- Ninguna",
+      "C).- Algunos modelos."
+    ],
+    "rightAnswer": "C).- Algunos modelos."
+  },
+  {
+    "text": "34. ¿Con qué elementos cuenta un arma para enfilarla hacia un blanco?.",
+    "answersList": [
+      "A).- A través del mecanismo de puntería.",
+      "B).- Con un buen empuñamiento.",
+      "C).- Con una buena sujeción del arma"
+    ],
+    "rightAnswer": "A).- A través del mecanismo de puntería."
+  },
+  {
+    "text": "35. ¿Qué elemento del arma regula el desplazamiento en altura de un impacto?.",
+    "answersList": [
+      "A).- El alza.",
+      "B).- El punto de mira.",
+      "C).- La longitud del cañón."
+    ],
+    "rightAnswer": "A).- El alza."
+  },
+  {
+    "text": "36. ¿Qué elemento del arma regula el desplazamiento lateral de un impacto?.",
+    "answersList": [
+      "A).- El alza.",
+      "B).- El punto de mira.",
+      "C).- La longitud del cañón."
+    ],
+    "rightAnswer": "B).- El punto de mira."
+  },
+  {
+    "text": "37. ¿Qué pieza del mecanismo de disparo transmite el movimiento del disparador?.",
+    "answersList": [
+      "A).-La biela.",
+      "B).-El elevador.",
+      "C).-El fiador."
+    ],
+    "rightAnswer": "A).-La biela."
+  },
+  {
+    "text": "38. En una escopeta semiautomática la expulsión de la vaina percutida se produce:",
+    "answersList": [
+      "A).- Manualmente a voluntad del tirador.",
+      "B).- Aprovechando la fuerza de retroceso para desplazar el cierre.",
+      "C).- Como consecuencia de un mecanismo adyacente al cierre que se acciona cada vez que se presiona el disparador."
+    ],
+    "rightAnswer": "B).- Aprovechando la fuerza de retroceso para desplazar el cierre."
+  },
+  {
+    "text": "39. En algunos rifles, ¿qué misión tienen uno o dos orificios situados en la parte anterior del cajón de los mecanismos?",
+    "answersList": [
+      "A).- Liberar la aguja percutora y que asome",
+      "B).- Ver si hay cartucho en la recámara",
+      "C).- Salida de gases en caso de rotura del cartucho"
+    ],
+    "rightAnswer": "C).- Salida de gases en caso de rotura del cartucho"
+  },
+  {
+    "text": "40. El disparador está protegido por:",
+    "answersList": [
+      "A).- El Guardamano",
+      "B).- El Guardamonte",
+      "C).- La culata"
+    ],
+    "rightAnswer": "B).- El Guardamonte"
+  },
+  {
+    "text": "41. ¿La báscula de una escopeta es considerada por el Reglamento de Armas como pieza fundamental del arma?.",
+    "answersList": [
+      "A).- Si",
+      "B).- No",
+      "C).- Depende de su estructura."
+    ],
+    "rightAnswer": "A).- Si"
+  },
+  {
+    "text": "42. ¿El cañón de una escopeta es considerada por el Reglamento de Armas como pieza fundamental del arma?.",
+    "answersList": [
+      "A).- Si.",
+      "B).- No.",
+      "C).- Depende de su estructura."
+    ],
+    "rightAnswer": "A).- Si."
+  },
+  {
+    "text": "43. La culata de un rifle es considerada por el Reglamento de Armas como pieza fundamental del arma.",
+    "answersList": [
+      "A).- Si.",
+      "B).- No.",
+      "C).- Depende de su estructura."
+    ],
+    "rightAnswer": "B).- No."
+  },
+  {
+    "text": "44. ¿Los elementos de puntería de una escopeta son considerados piezas fundamentales del arma?.",
+    "answersList": [
+      "A).- Si.",
+      "B).- No.",
+      "C).- Viene determinada por la posición de los mismos."
+    ],
+    "rightAnswer": "B).- No."
+  },
+  {
+    "text": "45. ¿Cuáles son las piezas fundamentales de una escopeta?.",
+    "answersList": [
+      "A).- Culata y cañón.",
+      "B).- Cierre, cañón y culata.",
+      "C).- Báscula y cañón."
+    ],
+    "rightAnswer": "C).- Báscula y cañón."
+  },
+  {
+    "text": "46. ¿Cuáles son las piezas fundamentales de un rifle?.",
+    "answersList": [
+      "A).- Cerrojo, cañón y culata.",
+      "B).- Cerrojo y cañón.",
+      "C).- Culata cañón y elementos de puntería."
+    ],
+    "rightAnswer": "B).- Cerrojo y cañón."
+  },
+  {
+    "text": "47. ¿Para qué sirve el seguro manual?",
+    "answersList": [
+      "A).- Para evitar el disparo, aun estando el arma montada.",
+      "B).- Para que no se caiga el cargador del arma accidentalmente.",
+      "C).- Para asegurar el blanco y efectuar un disparo certero."
+    ],
+    "rightAnswer": "A).- Para evitar el disparo, aun estando el arma montada."
+  },
+  {
+    "text": "48. ¿Qué pieza golpea el fulminante del cartucho?.",
+    "answersList": [
+      "A).-El tope del cerrojo.",
+      "B).-El percutor.",
+      "C).-La uña de extracción."
+    ],
+    "rightAnswer": "B).-El percutor."
+  },
+  {
+    "text": "49. ¿Qué avería se puede producir al disparar un arma en vacío?",
+    "answersList": [
+      "A).- Encasquillamiento del cierre.",
+      "B).- Bloqueo del elevador de cartucho.",
+      "C).- Rotura de la aguja percutora."
+    ],
+    "rightAnswer": "C).- Rotura de la aguja percutora."
+  },
+  {
+    "text": "50. El mecanismo de seguridad de un arma, ¿qué misión tiene?.",
+    "answersList": [
+      "A).- Evitar que se produzca un disparo involuntario.",
+      "B).- Evitar que se cargue el arma.",
+      "C).- Evitar que se descargue el arma."
+    ],
+    "rightAnswer": "A).- Evitar que se produzca un disparo involuntario."
+  },
+  {
+    "text": "51. ¿Puede tener seguro automático una escopeta de caza semiautomática?.",
+    "answersList": [
+      "A).- Depende del año de fabricación.",
+      "B).- Si.",
+      "C).- Las escopetas semiautomáticas no tienen seguro automático."
+    ],
+    "rightAnswer": "B).- Si."
+  },
+  {
+    "text": "52. Si un arma tiene el seguro de mano en posición “S”, ¿puede efectuar el disparo?.",
+    "answersList": [
+      "A).- Si.",
+      "B).- No.",
+      "C).- Si, si está alimentada y montada."
+    ],
+    "rightAnswer": "B).- No."
+  },
+  {
+    "text": "53. ¿Cómo se denomina la varilla que se utiliza para limpiar el interior del cañón de las armas?",
+    "answersList": [
+      "A).- Escobilla",
+      "B).- Baqueta",
+      "C).- Plumero"
+    ],
+    "rightAnswer": "B).- Baqueta"
+  },
+  {
+    "text": "54. ¿Con qué producto limpiaremos las partes de madera de un arma?",
+    "answersList": [
+      "A).- Con agua y jabón.",
+      "B).- Con gasolina o gasóleo.",
+      "C).- Con aceite de linaza."
+    ],
+    "rightAnswer": "C).- Con aceite de linaza."
+  },
+  {
+    "text": "55. Si se hubiese mojado el arma después de practicar el ejercicio de la caza, ¿cómo procederemos en relación con el arma?",
+    "answersList": [
+      "A).- Limpiar y engrasar el arma a la mayor brevedad para que no se oxide.",
+      "B).- No es necesario limpiar el arma.",
+      "C).- Basta con pasarle un trapo para secarla."
+    ],
+    "rightAnswer": "A).- Limpiar y engrasar el arma a la mayor brevedad para que no se oxide."
+  },
+  {
+    "text": "56. ¿Dónde guardaremos las armas de la categoría 2ª.2.?",
+    "answersList": [
+      "A).- En el propio domicilio, y en un armero homologado.",
+      "B).- En la funda dentro de un armario ropero.",
+      "C).- En cualquier lugar del domicilio"
+    ],
+    "rightAnswer": "A).- En el propio domicilio, y en un armero homologado."
+  },
+  {
+    "text": "57. ¿Se debe dejar una escopeta en el maletero del vehículo estacionado en la vía pública, hasta que al día siguiente se vaya a ir de caza?.",
+    "answersList": [
+      "A).- Sí, siempre que el maletero se encuentre perfectamente cerrado.",
+      "B).- Sí, siempre que el vehículo se encuentre estacionado cerca del domicilio del titular del arma.",
+      "C).- No, nunca."
+    ],
+    "rightAnswer": "C).- No, nunca."
+  },
+  {
+    "text": "58. ¿Cómo deberá transportarse un arma de fuego en un vehículo?",
+    "answersList": [
+      "A).- Cargadas",
+      "B).- Dispuestas para disparar si nos encontramos en época hábil de caza.",
+      "C).- Descargadas."
+    ],
+    "rightAnswer": "C).- Descargadas."
+  },
+  {
+    "text": "59. ¿Cómo se han de guardar las armas?",
+    "answersList": [
+      "A).- Cargadas y dispuestas para su uso.",
+      "B).- Los rifles separados de las escopetas.",
+      "C).- Descargadas y sin alimentar."
+    ],
+    "rightAnswer": "C).- Descargadas y sin alimentar."
+  },
+  {
+    "text": "60. ¿Qué medidas deben adoptarse al manejar un arma?",
+    "answersList": [
+      "A).- Como si estuviera siempre cargada.",
+      "B).- Con el seguro puesto.",
+      "C).- Como si estuviera descargada."
+    ],
+    "rightAnswer": "A).- Como si estuviera siempre cargada."
+  },
+  {
+    "text": "61. ¿Qué debe comprobarse siempre que se coja un arma?",
+    "answersList": [
+      "A).- Que tenga el seguro puesto.",
+      "B).- Que está descargada.",
+      "C).- Que esté limpia."
+    ],
+    "rightAnswer": "B).- Que está descargada."
+  },
+  {
+    "text": "62. ¿Qué lugar puede ser el más adecuado en el domicilio, para efectuar la limpieza de las armas?.",
+    "answersList": [
+      "A).- Una habitación donde se esté solo.",
+      "B).- El lugar de reunión de la familia, pues en el caso de un accidente, siempre se obtendrá ayuda inmediata de algún familiar.",
+      "C).- En la puerta de la calle, pues en el caso de producirse un disparo fortuito, saldría el proyectil al aire."
+    ],
+    "rightAnswer": "A).- Una habitación donde se esté solo."
+  },
+  {
+    "text": "63. ¿Qué es lo que nunca debemos hacer cuando desconozcamos el funcionamiento de un arma?",
+    "answersList": [
+      "A).- Desmontarla en evitación de que se produzca un disparo.",
+      "B).- Manipularla.",
+      "C).- Guardarla en su funda."
+    ],
+    "rightAnswer": "A).- Desmontarla en evitación de que se produzca un disparo."
+  },
+  {
+    "text": "64. ¿Qué es lo que se trata de evitar con el exacto cumplimiento de las normas de seguridad en el manejo de las armas?",
+    "answersList": [
+      "A).- Que se produzcan disparos fortuitos y por tanto causar daños irreparables.",
+      "B).- Ser sancionado por la Autoridad municipal.",
+      "C).- Que el arma se deteriore."
+    ],
+    "rightAnswer": "B).- Ser sancionado por la Autoridad municipal."
+  },
+  {
+    "text": "65. ¿Qué precauciones se han de tomar al coger un arma de fuego?",
+    "answersList": [
+      "A).- Cogerla sin poner el dedo en el disparador (gatillo).",
+      "B).- Que se encuentre bien engrasada.",
+      "C).- Comprobar que no está cargada apretando el gatillo."
+    ],
+    "rightAnswer": "A).- Cogerla sin poner el dedo en el disparador (gatillo)."
+  },
+  {
+    "text": "66. ¿Cómo se debe actuar ante la presencia o proximidad de otras personas?",
+    "answersList": [
+      "A).- Con habilidad.",
+      "B).- Con destreza.",
+      "C).- Descargando el arma."
+    ],
+    "rightAnswer": "C).- Descargando el arma."
+  },
+  {
+    "text": "67. Cuando cierre su escopeta, ¿a dónde debe dirigir la boca de fuego?",
+    "answersList": [
+      "A).- Hacia arriba.",
+      "B).- Hacia la horizontal",
+      "C).- Hacia el suelo."
+    ],
+    "rightAnswer": "C).- Hacia el suelo."
+  },
+  {
+    "text": "68. Al realizar un disparo con un rifle de caza mayor, debemos estar seguros de:",
+    "answersList": [
+      "A).- Visualizar la zona de impacto del proyectil.",
+      "B).- Que el proyectil seguirá una trayectoria horizontal.",
+      "C).- Que la carga del cartucho es la adecuada para alcanzar la pieza. "
+    ],
+    "rightAnswer": "A).- Visualizar la zona de impacto del proyectil."
+  }
 ]
