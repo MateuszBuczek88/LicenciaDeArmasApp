@@ -109,25 +109,19 @@ fun LearnContent(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Button(
-                            onClick = rightAnswer, elevation = ButtonDefaults.elevation(
-                                defaultElevation = 6.dp,
-                                pressedElevation = 8.dp,
-                                disabledElevation = 0.dp
-                            ), modifier = Modifier.weight(2f)
-                        ) {
-                            Text(text = stringResource(id = R.string.button_know_answer_text))
+                        Box(modifier = Modifier.weight(2f)) {
+                            AnswerButton(
+                                buttonText = stringResource(id = R.string.button_know_answer_text),
+                                rightAnswer
+                            )
                         }
                         Spacer(modifier = Modifier.width(20.dp))
 
-                        Button(
-                            onClick = wrongAnswer, elevation = ButtonDefaults.elevation(
-                                defaultElevation = 6.dp,
-                                pressedElevation = 8.dp,
-                                disabledElevation = 0.dp
-                            ), modifier = Modifier.weight(2f)
-                        ) {
-                            Text(text = stringResource(id = R.string.button_didnt_know_text))
+                        Box(modifier = Modifier.weight(2f)) {
+                            AnswerButton(
+                                buttonText = stringResource(id = R.string.button_didnt_know_text),
+                                wrongAnswer
+                            )
                         }
                     }
                 }
@@ -162,7 +156,6 @@ fun AnswerCard(answerText: String) {
     }
 }
 
-
 @Composable
 fun LoadingScreen() {
     Surface {
@@ -186,4 +179,18 @@ fun FailureLoadingQuestionsToast() {
         stringResource(id = R.string.failure_toast_message),
         Toast.LENGTH_LONG
     ).show()
+}
+
+@Composable
+fun AnswerButton(buttonText: String, onClick: () -> Unit) {
+    Button(
+        modifier = Modifier.fillMaxWidth(),
+        onClick = onClick, elevation = ButtonDefaults.elevation(
+            defaultElevation = 6.dp,
+            pressedElevation = 8.dp,
+            disabledElevation = 0.dp
+        )
+    ) {
+        Text(text = buttonText)
+    }
 }
