@@ -37,28 +37,13 @@ class TestFragment : Fragment() {
                     val question by viewModel.question.observeAsState()
                     val rightAnswers by viewModel.rightAnswers.observeAsState()
                     val wrongAnswers by viewModel.wrongAnswers.observeAsState()
-                    val loadError by viewModel.loadError.observeAsState()
-                    val isLoading by viewModel.isLoading.observeAsState()
-                    val showResult by viewModel.showResult.observeAsState()
                     val questionsLeft by viewModel.questionsLeft.observeAsState()
-                    if (showResult != true) {
-                        if (isLoading != true) {
+                    val testScreenState by viewModel.testScreenState.observeAsState()
 
-                            loadError?.let {
-                                questionsLeft?.let { questionsLeft ->
-                                    TestContent(loadError = it, question = question, questionsLeft = questionsLeft,
-                                        onAnswerButtonClick = { answer ->
-                                            viewModel.checkAnswer(answer)
-                                        })
-                                }
-                            }
-
-                        } else {
-                            LoadingScreen()
-                        }
-                    } else {
-
-                        ResultScreen(message = stringResource(
+                    when (testScreenState) {
+                        TestScreenState.IsLoading -> LoadingScreen()
+                        TestScreenState.LoadError -> FailureLoadingQuestionsToast()
+                        TestScreenState.ShowResult -> ResultScreen(message = stringResource(
                             id = R.string.test_result_screen_message,
                             rightAnswers!!,
                             wrongAnswers!!
@@ -66,6 +51,16 @@ class TestFragment : Fragment() {
                             { findNavController().navigate(R.id.homeScreenFragment) },
                             { findNavController().navigate(R.id.testFragment) }
                         )
+                        TestScreenState.ShowQuestion -> questionsLeft?.let {
+                            TestContent(
+                                questionsLeft = it,
+                                question = question,
+                                onAnswerButtonClick = { answer ->
+                                    viewModel.checkAnswer(answer)
+                                }
+                            )
+                        }
+                        null -> TODO()
                     }
                 }
             }
@@ -76,14 +71,11 @@ class TestFragment : Fragment() {
 
 @Composable
 fun TestContent(
-    questionsLeft:Int,
-    loadError: Boolean,
+    questionsLeft: Int,
     question: Question?,
     onAnswerButtonClick: (String) -> Unit
 ) {
-    if (loadError) {
-        FailureLoadingQuestionsToast()
-    }
+
 
     question?.let {
         Surface {
@@ -92,7 +84,10 @@ fun TestContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(8.dp)
             ) {
-                Text(text = stringResource(id = R.string.questions_left, questionsLeft), fontSize = 24.sp )
+                Text(
+                    text = stringResource(id = R.string.questions_left, questionsLeft),
+                    fontSize = 24.sp
+                )
                 Spacer(modifier = Modifier.height(25.dp))
                 QuestionCard(questionText = question.text)
                 Spacer(modifier = Modifier.height(20.dp))

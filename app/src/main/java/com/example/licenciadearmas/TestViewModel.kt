@@ -27,11 +27,10 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
                         testQuestionsList = it.toMutableList()
                         _question.value = testQuestionsList.firstOrNull()
                         _questionsLeft.value = testQuestionsList.size
-                        _isLoading.value = false
+                        _testScreenState.value = TestScreenState.ShowQuestion
                     },
                         {
-                            _loadError.value = true
-                            _isLoading.value = false
+                            _testScreenState.value = TestScreenState.LoadError
                         })
                 }
         }
@@ -39,21 +38,12 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
 
     private var testQuestionsList: MutableList<Question> = mutableListOf()
 
+    private val _testScreenState = MutableLiveData(TestScreenState.IsLoading)
+    val testScreenState: LiveData<TestScreenState>
+        get() = _testScreenState
     private val _questionsLeft = MutableLiveData(0)
     val questionsLeft: LiveData<Int>
         get() = _questionsLeft
-
-    private val _isLoading = MutableLiveData(true)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
-
-    private val _loadError = MutableLiveData(false)
-    val loadError: LiveData<Boolean>
-        get() = _loadError
-
-    private val _showResult = MutableLiveData(false)
-    val showResult: LiveData<Boolean>
-        get() = _showResult
 
     private val _question = MutableLiveData<Question?>(null)
     val question: LiveData<Question?>
@@ -86,7 +76,7 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
 
             _question.value = testQuestionsList.first()
         } else {
-            _showResult.value = true
+            _testScreenState.value = TestScreenState.ShowResult
         }
     }
 
