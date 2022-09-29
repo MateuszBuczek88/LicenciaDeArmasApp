@@ -111,7 +111,7 @@ fun QuestionCard(questionText: String) {
         elevation = 12.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
-        Text(text = questionText, modifier = Modifier.padding(8.dp), fontSize = 18.sp)
+        Text(text = questionText, modifier = Modifier.padding(8.dp), fontSize = 20.sp)
     }
 }
 

@@ -1,7 +1,6 @@
 package com.example.licenciadearmas
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +9,19 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.licenciadearmas.data.Question
@@ -40,38 +43,39 @@ class LearnFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
-                    val isLoading by viewModel.isLoading.observeAsState()
+
                     val question: Question? by viewModel.question.observeAsState()
-                    val showAnswer by viewModel.showAnswer.observeAsState()
-                    val showResult by viewModel.showResult.observeAsState()
-                    val loadError by viewModel.loadError.observeAsState()
+                    val questionsLeft by viewModel.questionsLeft.observeAsState()
+                    val learScreenState by viewModel.learnScreenState.observeAsState()
 
-                    if (isLoading != true) {
-                        if (showResult != true) {
+                    when (learScreenState) {
+                        LearnScreenState.IsLoading -> LoadingScreen()
+                        LearnScreenState.LoadError -> FailureLoadingQuestionsToast()
+                        LearnScreenState.ShowResult -> ResultScreen(
+                            message = stringResource(id = R.string.learn_result_screen_message),
+                            navigateHome = { findNavController().navigate(R.id.homeScreenFragment) },
+                            playAgain = { findNavController().navigate(R.id.chooseSectionFragment) })
 
-                            showAnswer?.let { showAnswer ->
-
-                                loadError?.let { it1 ->
-                                    LearnContent(
-                                        loadError = it1,
-                                        question = question,
-                                        showButtons = showAnswer,
-                                        onQuestionClick = { viewModel.showAnswer() },
-                                        rightAnswer = { viewModel.rightAnswer() },
-                                        wrongAnswer = { viewModel.wrongAnswer() }
+                        LearnScreenState.ShowQuestion -> questionsLeft?.let {
+                            ShowQuestion(
+                                question = question,
+                                onAnswerButtonClick = { chosenAnswer ->
+                                    viewModel.showAnswer(
+                                        chosenAnswer
                                     )
-                                }
-                            }
-
-                        } else {
-                            ResultScreen(
-                                message = stringResource(id = R.string.learn_result_screen_message),
-                                navigateHome = { findNavController().navigate(R.id.homeScreenFragment) },
-                                playAgain = { findNavController().navigate(R.id.chooseSectionFragment) }
+                                }, questionsLeft = it
                             )
                         }
-                    } else {
-                        LoadingScreen()
+                        LearnScreenState.ShowAnswer -> questionsLeft?.let {
+                            ShowAnswers(
+                                question = question!!,
+                                onSurfaceClick = { viewModel.loadNextQuestion() },
+                                questionsLeft = it
+                            )
+                        }
+
+
+                        null -> TODO()
                     }
                 }
             }
@@ -80,13 +84,10 @@ class LearnFragment : Fragment() {
 }
 
 @Composable
-fun LearnContent(
-    loadError: Boolean,
+fun ShowQuestion(
     question: Question?,
-    onQuestionClick: () -> Unit,
-    showButtons: Boolean,
-    rightAnswer: () -> Unit,
-    wrongAnswer: () -> Unit
+    onAnswerButtonClick: (String) -> Unit,
+    questionsLeft: Int
 ) {
     Surface {
         Column(
@@ -94,67 +95,122 @@ fun LearnContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(8.dp)
         ) {
-            if (loadError) {
-                FailureLoadingQuestionsToast()
-            }
+
             question?.let {
-                QuestionCard(question = question, onQuestionClick = onQuestionClick)
+                Text(
+                    text = stringResource(id = R.string.questions_left, questionsLeft),
+                    fontSize = 24.sp
+                )
                 Spacer(modifier = Modifier.height(20.dp))
-
-                if (showButtons) {
-                    AnswerCard(answerText = question.rightAnswer)
-                    Spacer(modifier = Modifier.height(20.dp))
-
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(modifier = Modifier.weight(2f)) {
-                            AnswerButton(
-                                buttonText = stringResource(id = R.string.button_know_answer_text),
-                                rightAnswer
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(20.dp))
-
-                        Box(modifier = Modifier.weight(2f)) {
-                            AnswerButton(
-                                buttonText = stringResource(id = R.string.button_didnt_know_text),
-                                wrongAnswer
-                            )
-                        }
-                    }
-                }
+                QuestionCard(question = question)
+                Spacer(modifier = Modifier.height(20.dp))
+                ShowPossibleAnswers(
+                    question = question,
+                    onAnswerButtonClick = onAnswerButtonClick
+                )
             }
         }
     }
 }
 
 @Composable
-fun QuestionCard(question: Question, onQuestionClick: () -> Unit) {
+fun ShowAnswers(question: Question, onSurfaceClick: () -> Unit, questionsLeft: Int) {
+    Surface(modifier = Modifier.clickable { onSurfaceClick() }) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(8.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.questions_left, questionsLeft),
+                fontSize = 24.sp
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            QuestionCard(question = question)
+            Spacer(modifier = Modifier.height(20.dp))
+            ShowCorrectAnswer(question = question)
+        }
+
+    }
+}
+
+@Composable
+fun QuestionCard(question: Question) {
     Surface(
-        modifier = Modifier.clickable(onClick = onQuestionClick),
         elevation = 12.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
         Column {
-            Text(text = question.text, modifier = Modifier.padding(8.dp), fontSize = 18.sp)
-            Text(
-                text = question.answersList.joinToString(separator = "\n"),
-                modifier = Modifier.padding(8.dp),
-                fontSize = 18.sp,
-                lineHeight = 30.sp
-            )
+            Text(text = question.text, modifier = Modifier.padding(8.dp), fontSize = 20.sp)
         }
     }
 }
 
 @Composable
-fun AnswerCard(answerText: String) {
-    Surface {
-        Text(text = answerText, style = MaterialTheme.typography.body2, fontSize = 18.sp)
+fun ShowCorrectAnswer(question: Question) {
+
+    question.answersList.forEach {
+        val color =
+            if (it == question.rightAnswer) colorResource(id = R.color.logo_green) else colorResource(
+                id = R.color.logo_red
+            )
+
+        Surface(
+            color = color,
+            shape = MaterialTheme.shapes.small,
+            modifier = Modifier
+                .fillMaxWidth(0.95f)
+                .padding(1.dp), elevation = 6.dp
+        ) {
+            Row(
+                Modifier
+                    .defaultMinSize(
+                        minWidth = ButtonDefaults.MinWidth,
+                        minHeight = ButtonDefaults.MinHeight
+                    )
+                    .padding(ButtonDefaults.ContentPadding),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = it,
+                    Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Left,
+                    style = MaterialTheme.typography.button
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(8.dp))
     }
 }
+
+@Composable
+fun ShowPossibleAnswers(
+    question: Question,
+    onAnswerButtonClick: (String) -> Unit,
+    ) {
+    
+    Column {
+
+    }
+    question.answersList.forEach {
+        Button(
+            onClick = {
+                onAnswerButtonClick(it)
+            },
+            modifier = Modifier.fillMaxWidth(0.95f),
+            elevation = ButtonDefaults.elevation(
+                defaultElevation = 6.dp,
+                pressedElevation = 8.dp,
+                disabledElevation = 0.dp
+            )
+        ) {
+            Text(text = it, Modifier.fillMaxWidth(), textAlign = TextAlign.Left)
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+    }
+}
+
 
 @Composable
 fun LoadingScreen() {
@@ -179,18 +235,4 @@ fun FailureLoadingQuestionsToast() {
         stringResource(id = R.string.failure_toast_message),
         Toast.LENGTH_LONG
     ).show()
-}
-
-@Composable
-fun AnswerButton(buttonText: String, onClick: () -> Unit) {
-    Button(
-        modifier = Modifier.fillMaxWidth(),
-        onClick = onClick, elevation = ButtonDefaults.elevation(
-            defaultElevation = 6.dp,
-            pressedElevation = 8.dp,
-            disabledElevation = 0.dp
-        )
-    ) {
-        Text(text = buttonText)
-    }
 }

@@ -13,4 +13,6 @@
     <color name="primaryDarkColor">#4b636e</color>
     <color name="primaryTextColor">#000000</color>
     <color name="crosshair_red">#fb0102</color>
+    <color name="logo_red">#e24034</color>
+    <color name="logo_green">#47ac27</color>
 </resources>

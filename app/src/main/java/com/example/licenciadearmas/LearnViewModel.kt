@@ -17,44 +17,43 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
             repository.getQuestionList(section).fold(onSuccess = {
                 questionList = it.toMutableList()
                 _question.value = questionList.firstOrNull()
+                _questionsLeft.value = questionList.size
+                _learnScreenState.value = LearnScreenState.ShowQuestion
             }, onFailure = {
-                _loadError.value = true
+                _learnScreenState.value = LearnScreenState.LoadError
             })
-            _isLoading.value = false
         }
     }
 
-    private val _loadError = MutableLiveData(false)
-    val loadError: LiveData<Boolean>
-        get() = _loadError
-
-    private val _isLoading = MutableLiveData(true)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
+    private val _learnScreenState = MutableLiveData(LearnScreenState.IsLoading)
+    val learnScreenState: LiveData<LearnScreenState>
+        get() = _learnScreenState
+    private val _questionsLeft = MutableLiveData(0)
+    val questionsLeft: LiveData<Int>
+        get() = _questionsLeft
 
     private val _question = MutableLiveData<Question?>(null)
     val question: LiveData<Question?>
         get() = _question
-
-    private val _showAnswer = MutableLiveData(false)
-    val showAnswer: LiveData<Boolean>
-        get() = _showAnswer
-
-    private val _showResult = MutableLiveData(false)
-    val showResult: LiveData<Boolean>
-        get() = _showResult
-
-    fun showAnswer() {
-        _showAnswer.value = true
+    private var answer =""
+    fun showAnswer(chosenAnswer: String) {
+        _learnScreenState.value = LearnScreenState.ShowAnswer
+        answer = chosenAnswer
     }
+
+    fun loadNextQuestion(){
+        if (answer == _question.value!!.rightAnswer) rightAnswer() else wrongAnswer()
+        _questionsLeft.value = questionList.size
+    }
+
 
     fun rightAnswer() {
         questionList.removeFirstOrNull()
         if (questionList.isNotEmpty()) {
             _question.value = questionList.first()
-            _showAnswer.value = false
+            _learnScreenState.value = LearnScreenState.ShowQuestion
         } else {
-            _showResult.value = true
+            _learnScreenState.value = LearnScreenState.ShowResult
         }
     }
 
@@ -63,8 +62,8 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
             _question.value?.let { questionList.add(it) }
             questionList.removeFirst()
             _question.value = questionList.first()
+            _learnScreenState.value = LearnScreenState.ShowQuestion
         }
-        _showAnswer.value = false
     }
 
     init {
