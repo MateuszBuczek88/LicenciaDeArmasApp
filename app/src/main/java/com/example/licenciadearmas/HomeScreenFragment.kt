@@ -13,9 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,7 +61,7 @@ fun HomeScreenContent(
                 SecondaryText(textRes = R.string.home_screen_secondary_text)
                 Spacer(modifier = Modifier.weight(1f))
 
-                HomeScreenImage(imageRes = R.color.primaryDarkColor)
+                HomeScreenImage(imageRes = R.color.logo_red)
                 Spacer(modifier = Modifier.weight(1f))
 
                 HomeScreenButton(

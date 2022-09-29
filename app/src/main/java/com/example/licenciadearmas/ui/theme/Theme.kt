@@ -37,12 +37,19 @@ fun LightColorPalette() = lightColors(
 )
 
 @Composable
+fun DarkColorPalette() = darkColors(
+    primary = colorResource(id = R.color.primaryColor),
+    primaryVariant = colorResource(id = R.color.primaryLightColor),
+    secondary = Teal200
+)
+
+@Composable
 fun LicenciaDeArmasTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        DarkColorPalette()
     } else {
         LightColorPalette()
     }
