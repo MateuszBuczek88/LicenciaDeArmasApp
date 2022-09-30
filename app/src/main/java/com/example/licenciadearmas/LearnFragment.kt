@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -73,8 +74,6 @@ class LearnFragment : Fragment() {
                                 questionsLeft = it
                             )
                         }
-
-
                         null -> TODO()
                     }
                 }
@@ -115,7 +114,7 @@ fun ShowQuestion(
 
 @Composable
 fun ShowAnswers(question: Question, onSurfaceClick: () -> Unit, questionsLeft: Int) {
-    Surface(modifier = Modifier.clickable { onSurfaceClick() }) {
+    Surface {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -130,7 +129,10 @@ fun ShowAnswers(question: Question, onSurfaceClick: () -> Unit, questionsLeft: I
             Spacer(modifier = Modifier.height(20.dp))
             ShowCorrectAnswer(question = question)
         }
+        Surface(modifier = Modifier
+            .fillMaxSize()
 
+            .clickable { onSurfaceClick() }, color = Color.Transparent){}
     }
 }
 
@@ -155,30 +157,26 @@ fun ShowCorrectAnswer(question: Question) {
                 id = R.color.logo_red
             )
 
-        Surface(
-            color = color,
-            shape = MaterialTheme.shapes.small,
+        Button(
+            onClick = {},
+            enabled = false,
+            colors = ButtonDefaults.buttonColors(disabledBackgroundColor = color),
             modifier = Modifier
-                .fillMaxWidth(0.95f)
-                .padding(1.dp), elevation = 6.dp
+                .fillMaxWidth(0.95f),
+            elevation = ButtonDefaults.elevation(
+                defaultElevation = 6.dp,
+                pressedElevation = 8.dp,
+                disabledElevation = 6.dp
+            )
+
         ) {
-            Row(
-                Modifier
-                    .defaultMinSize(
-                        minWidth = ButtonDefaults.MinWidth,
-                        minHeight = ButtonDefaults.MinHeight
-                    )
-                    .padding(ButtonDefaults.ContentPadding),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    text = it,
-                    Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Left,
-                    style = MaterialTheme.typography.button
-                )
-            }
+            Text(
+                text = it,
+                Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Left,
+                style = MaterialTheme.typography.button,
+                color = Color.Black
+            )
         }
         Spacer(modifier = Modifier.height(8.dp))
     }
