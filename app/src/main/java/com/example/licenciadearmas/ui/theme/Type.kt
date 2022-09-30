@@ -12,6 +12,10 @@ val robotoFont = FontFamily(
     Font(R.font.roboto_thin),
     Font(R.font.roboto_bold, FontWeight.Bold)
 )
+val gunpPlay = FontFamily(
+    Font(R.font.gunplay_rg),
+
+)
 // Set of Material typography styles to start with
 val Typography = Typography(
     body1 = TextStyle(
