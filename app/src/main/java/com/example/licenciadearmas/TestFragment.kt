@@ -13,6 +13,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.ui.theme.LicenciaDeArmasTheme
+import com.example.licenciadearmas.ui.theme.gunpPlay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TestFragment : Fragment() {
@@ -86,7 +88,9 @@ fun TestContent(
             ) {
                 Text(
                     text = stringResource(id = R.string.questions_left, questionsLeft),
-                    fontSize = 24.sp
+                    fontSize = 24.sp,
+                    fontFamily = gunpPlay,
+                    color = colorResource(id = R.color.logo_red)
                 )
                 Spacer(modifier = Modifier.height(25.dp))
                 QuestionCard(questionText = question.text)

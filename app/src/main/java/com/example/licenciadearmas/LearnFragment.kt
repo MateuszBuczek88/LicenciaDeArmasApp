@@ -28,6 +28,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.licenciadearmas.data.Question
 import com.example.licenciadearmas.data.Section
 import com.example.licenciadearmas.ui.theme.LicenciaDeArmasTheme
+import com.example.licenciadearmas.ui.theme.gunpPlay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -44,6 +45,7 @@ class LearnFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
+                    BackgorundBox()
 
                     val question: Question? by viewModel.question.observeAsState()
                     val questionsLeft by viewModel.questionsLeft.observeAsState()
@@ -88,7 +90,7 @@ fun ShowQuestion(
     onAnswerButtonClick: (String) -> Unit,
     questionsLeft: Int
 ) {
-    Surface {
+
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -98,7 +100,9 @@ fun ShowQuestion(
             question?.let {
                 Text(
                     text = stringResource(id = R.string.questions_left, questionsLeft),
-                    fontSize = 24.sp
+                    fontSize = 24.sp,
+                    fontFamily = gunpPlay,
+                    color = colorResource(id = R.color.logo_red)
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 QuestionCard(question = question)
@@ -109,12 +113,12 @@ fun ShowQuestion(
                 )
             }
         }
-    }
+
 }
 
 @Composable
 fun ShowAnswers(question: Question, onSurfaceClick: () -> Unit, questionsLeft: Int) {
-    Surface {
+
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -122,18 +126,23 @@ fun ShowAnswers(question: Question, onSurfaceClick: () -> Unit, questionsLeft: I
         ) {
             Text(
                 text = stringResource(id = R.string.questions_left, questionsLeft),
-                fontSize = 24.sp
+                fontSize = 24.sp,
+                fontFamily = gunpPlay,
+                color = colorResource(id = R.color.logo_red)
             )
             Spacer(modifier = Modifier.height(20.dp))
             QuestionCard(question = question)
             Spacer(modifier = Modifier.height(20.dp))
             ShowCorrectAnswer(question = question)
-        }
-        Surface(modifier = Modifier
+
+
+    }
+    Surface(
+        modifier = Modifier
             .fillMaxSize()
 
-            .clickable { onSurfaceClick() }, color = Color.Transparent){}
-    }
+            .clickable { onSurfaceClick() }, color = Color.Transparent
+    ) {}
 }
 
 @Composable
@@ -186,8 +195,8 @@ fun ShowCorrectAnswer(question: Question) {
 fun ShowPossibleAnswers(
     question: Question,
     onAnswerButtonClick: (String) -> Unit,
-    ) {
-    
+) {
+
     Column {
 
     }

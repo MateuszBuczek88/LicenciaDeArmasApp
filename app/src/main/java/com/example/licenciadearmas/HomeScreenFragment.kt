@@ -12,12 +12,16 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
@@ -35,11 +39,13 @@ class HomeScreenFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
+                    BackgorundBox()
 
                     HomeScreenContent(
                         onLearnClick = { findNavController().navigate(R.id.chooseSectionFragment) },
-                        onTestClick = { findNavController().navigate(R.id.testFragment) }
-                    )
+                        onTestClick = { findNavController().navigate(R.id.testFragment) },
+
+                        )
 
                 }
             }
@@ -51,20 +57,20 @@ class HomeScreenFragment : Fragment() {
 fun HomeScreenContent(
     onLearnClick: () -> Unit,
     onTestClick: () -> Unit,
-) {
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
+
+
     ) {
+
+    Surface(modifier = Modifier.fillMaxSize(), color = Color.Transparent) {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .padding(16.dp)
                 .verticalScroll(rememberScrollState())
+                .fillMaxSize()
         ) {
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(25.dp))
 
 
             MainText(textRes = R.string.home_screen_main_text)
@@ -90,15 +96,8 @@ fun HomeScreenContent(
             Spacer(modifier = Modifier.height(65.dp))
         }
     }
-
-
 }
 
-@Preview
-@Composable
-fun HomeScreenContentPreview() {
-    HomeScreenContent(onLearnClick = { /*TODO*/ }, onTestClick = { /*TODO*/ })
-}
 
 @Composable
 fun HomeScreenButton(text: String, onClick: () -> Unit) {
@@ -134,7 +133,12 @@ fun HomeScreenImage(imageRes: Int) {
 
 @Composable
 fun MainText(textRes: Int) {
-    Text(text = stringResource(id = textRes), fontSize = 40.sp, fontFamily = gunpPlay)
+    Text(
+        text = stringResource(id = textRes),
+        textAlign = TextAlign.Center,
+        fontSize = 40.sp,
+        fontFamily = gunpPlay
+    )
     Spacer(modifier = Modifier.height(15.dp))
 }
 
@@ -146,4 +150,20 @@ fun SecondaryText(textRes: Int) {
         color = colorResource(id = R.color.logo_red),
         fontFamily = gunpPlay
     )
+}
+
+@Composable
+fun BackgorundBox(){
+    Box(
+        modifier = Modifier.fillMaxSize()
+
+    )
+    {
+        Image(
+            bitmap = ImageBitmap.imageResource(id = R.drawable.background),
+            contentDescription = "",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize()
+        )
+    }
 }
