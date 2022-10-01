@@ -23,13 +23,14 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
                 .awaitAll().let { resultList ->
                     runCatching {
                         resultList.flatMap { it.getOrThrow() }
-                    }.fold({
-                        testQuestionsList = it.toMutableList()
-                        _question.value = testQuestionsList.firstOrNull()
-                        _questionsLeft.value = testQuestionsList.size
-                        _testScreenState.value = TestScreenState.ShowQuestion
-                    },
-                        {
+                    }.fold(
+                        onSuccess = {
+                            testQuestionsList = it.toMutableList()
+                            _question.value = testQuestionsList.firstOrNull()
+                            _questionsLeft.value = testQuestionsList.size
+                            _testScreenState.value = TestScreenState.ShowQuestion
+                        },
+                        onFailure = {
                             _testScreenState.value = TestScreenState.LoadError
                         })
                 }
@@ -61,7 +62,6 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
         if (question.value?.rightAnswer == userAnswer) {
             _rightAnswers.value = _rightAnswers.value?.plus(1)
             nextQuestion()
-
 
         } else {
             nextQuestion()

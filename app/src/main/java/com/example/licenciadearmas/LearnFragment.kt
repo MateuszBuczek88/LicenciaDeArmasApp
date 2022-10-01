@@ -45,7 +45,7 @@ class LearnFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
-                    BackgorundBox()
+                    BackgroundBox()
 
                     val question: Question? by viewModel.question.observeAsState()
                     val questionsLeft by viewModel.questionsLeft.observeAsState()
@@ -59,22 +59,24 @@ class LearnFragment : Fragment() {
                             navigateHome = { findNavController().navigate(R.id.homeScreenFragment) },
                             playAgain = { findNavController().navigate(R.id.chooseSectionFragment) })
 
-                        LearnScreenState.ShowQuestion -> questionsLeft?.let {
+                        LearnScreenState.ShowQuestion -> questionsLeft?.let { _questionsLeft ->
                             ShowQuestion(
                                 question = question,
                                 onAnswerButtonClick = { chosenAnswer ->
                                     viewModel.showAnswer(
                                         chosenAnswer
                                     )
-                                }, questionsLeft = it
+                                }, questionsLeft = _questionsLeft
                             )
                         }
                         LearnScreenState.ShowAnswer -> questionsLeft?.let {
-                            ShowAnswers(
-                                question = question!!,
-                                onSurfaceClick = { viewModel.loadNextQuestion() },
-                                questionsLeft = it
-                            )
+                            question?.let { question ->
+                                ShowAnswers(
+                                    question = question,
+                                    onSurfaceClick = { viewModel.loadNextQuestion() },
+                                    questionsLeft = it
+                                )
+                            }
                         }
                         null -> TODO()
                     }
@@ -226,7 +228,7 @@ fun LoadingScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CircularProgressIndicator(strokeWidth = 5.dp, modifier = Modifier.size(80.dp, 80.dp), color = colorResource(
+            CircularProgressIndicator(strokeWidth = 10.dp, modifier = Modifier.size(100.dp, 100.dp), color = colorResource(
                 id = R.color.logo_red
             ))
             Spacer(modifier = Modifier.height(20.dp))

@@ -5,18 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,7 +21,6 @@ import androidx.navigation.findNavController
 import com.example.licenciadearmas.data.Section
 import com.example.licenciadearmas.ui.theme.LicenciaDeArmasTheme
 import com.example.licenciadearmas.ui.theme.Shapes
-import com.example.licenciadearmas.ui.theme.gunpPlay
 
 class ChooseSectionFragment : Fragment() {
 
@@ -38,7 +32,7 @@ class ChooseSectionFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
-                  BackgorundBox()
+                  BackgroundBox()
                     ChooseSectionContent { section ->
                         findNavController().navigate(
                             ChooseSectionFragmentDirections.actionChooseSectionFragmentToLearnFragment(

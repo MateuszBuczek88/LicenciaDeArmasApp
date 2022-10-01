@@ -14,14 +14,15 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
     private var questionList: MutableList<Question> = mutableListOf()
     private fun getQuestions() {
         viewModelScope.launch(Dispatchers.Main) {
-            repository.getQuestionList(section).fold(onSuccess = {
-                questionList = it.toMutableList()
-                _question.value = questionList.firstOrNull()
-                _questionsLeft.value = questionList.size
-                _learnScreenState.value = LearnScreenState.ShowQuestion
-            }, onFailure = {
-                _learnScreenState.value = LearnScreenState.LoadError
-            })
+            repository.getQuestionList(section).fold(
+                onSuccess = {
+                    questionList = it.toMutableList()
+                    _question.value = questionList.firstOrNull()
+                    _questionsLeft.value = questionList.size
+                    _learnScreenState.value = LearnScreenState.ShowQuestion
+                }, onFailure = {
+                    _learnScreenState.value = LearnScreenState.LoadError
+                })
         }
     }
 
@@ -35,19 +36,19 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
     private val _question = MutableLiveData<Question?>(null)
     val question: LiveData<Question?>
         get() = _question
-    private var answer =""
+    private var answer = ""
+
     fun showAnswer(chosenAnswer: String) {
         _learnScreenState.value = LearnScreenState.ShowAnswer
         answer = chosenAnswer
     }
 
-    fun loadNextQuestion(){
-        if (answer == _question.value!!.rightAnswer) rightAnswer() else wrongAnswer()
+    fun loadNextQuestion() {
+        if (answer == _question.value?.rightAnswer) rightAnswer() else wrongAnswer()
         _questionsLeft.value = questionList.size
     }
 
-
-    fun rightAnswer() {
+    private fun rightAnswer() {
         questionList.removeFirstOrNull()
         if (questionList.isNotEmpty()) {
             _question.value = questionList.first()
@@ -57,7 +58,7 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
         }
     }
 
-    fun wrongAnswer() {
+    private fun wrongAnswer() {
         if (questionList.isNotEmpty()) {
             _question.value?.let { questionList.add(it) }
             questionList.removeFirst()

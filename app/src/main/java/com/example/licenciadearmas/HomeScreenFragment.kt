@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -13,7 +12,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -41,7 +39,7 @@ class HomeScreenFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
-                    BackgorundBox()
+                    BackgroundBox()
 
                     HomeScreenContent(
                         onLearnClick = { findNavController().navigate(R.id.chooseSectionFragment) },
@@ -59,44 +57,34 @@ class HomeScreenFragment : Fragment() {
 fun HomeScreenContent(
     onLearnClick: () -> Unit,
     onTestClick: () -> Unit,
-
-
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
     ) {
+        Spacer(modifier = Modifier.height(25.dp))
+        MainText(textRes = R.string.home_screen_main_text)
 
-    Surface(modifier = Modifier.fillMaxSize(), color = Color.Transparent) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .fillMaxSize()
-        ) {
+        SecondaryText(textRes = R.string.home_screen_secondary_text)
+        Spacer(modifier = Modifier.weight(1f))
 
-            Spacer(modifier = Modifier.height(25.dp))
+        HomeScreenImage(imageRes = R.drawable.ic_lda_logo)
+        Spacer(modifier = Modifier.weight(1f))
 
+        HomeScreenButton(
+            text = stringResource(id = R.string.learn_button_text),
+            onClick = onLearnClick
+        )
 
-            MainText(textRes = R.string.home_screen_main_text)
-
-            SecondaryText(textRes = R.string.home_screen_secondary_text)
-            Spacer(modifier = Modifier.weight(1f))
-
-            HomeScreenImage(imageRes = R.drawable.ic_path234)
-            Spacer(modifier = Modifier.weight(1f))
-
-            HomeScreenButton(
-                text = stringResource(id = R.string.learn_button_text),
-                onClick = onLearnClick
-            )
-
-            Spacer(modifier = Modifier.height(25.dp))
-
-            HomeScreenButton(
-                text = stringResource(id = R.string.test_button_text),
-                onClick = onTestClick
-            )
-
-            Spacer(modifier = Modifier.height(65.dp))
-        }
+        Spacer(modifier = Modifier.height(25.dp))
+        HomeScreenButton(
+            text = stringResource(id = R.string.test_button_text),
+            onClick = onTestClick
+        )
+        Spacer(modifier = Modifier.height(65.dp))
     }
 }
 
@@ -105,17 +93,16 @@ fun HomeScreenContent(
 fun HomeScreenButton(text: String, onClick: () -> Unit) {
     Button(
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
+        colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.logo_red)),
         shape = Shapes.small,
-       elevation = ButtonDefaults.elevation(
-            defaultElevation = 6.dp,
+        elevation = ButtonDefaults.elevation(
+            defaultElevation = 12.dp,
             pressedElevation = 8.dp,
-           disabledElevation = 0.dp
-       ),
+            disabledElevation = 0.dp
+        ),
         modifier = Modifier
             .fillMaxWidth(0.85f)
             .height(50.dp)
-            .background(Brush.verticalGradient(listOf(Color.Gray,Color.White,Color.Gray)))
     ) {
         Text(
             text = text,
@@ -159,7 +146,7 @@ fun SecondaryText(textRes: Int) {
 }
 
 @Composable
-fun BackgorundBox(){
+fun BackgroundBox() {
     Box(
         modifier = Modifier.fillMaxSize()
 
