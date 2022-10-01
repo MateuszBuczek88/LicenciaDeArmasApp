@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -35,6 +36,7 @@ class TestFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LicenciaDeArmasTheme {
+                    BackgorundBox()
 
                     val question by viewModel.question.observeAsState()
                     val rightAnswers by viewModel.rightAnswers.observeAsState()
@@ -80,7 +82,7 @@ fun TestContent(
 
 
     question?.let {
-        Surface {
+
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -100,7 +102,7 @@ fun TestContent(
                     onAnswerButtonClick = onAnswerButtonClick
                 )
             }
-        }
+
     }
 }
 
@@ -143,7 +145,7 @@ fun ResultScreen(
     navigateHome: () -> Unit,
     playAgain: () -> Unit
 ) {
-    Surface {
+
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -152,7 +154,8 @@ fun ResultScreen(
             Text(
                 text = message,
                 fontSize = 25.sp,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                fontFamily = gunpPlay
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
@@ -179,6 +182,6 @@ fun ResultScreen(
                 Text(text = stringResource(id = R.string.home_button_text))
             }
         }
-    }
+
 }
 

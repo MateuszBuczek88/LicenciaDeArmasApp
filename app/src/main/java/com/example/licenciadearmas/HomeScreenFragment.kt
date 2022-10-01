@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -12,6 +13,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -103,19 +105,23 @@ fun HomeScreenContent(
 fun HomeScreenButton(text: String, onClick: () -> Unit) {
     Button(
         onClick = onClick,
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
         shape = Shapes.small,
-        elevation = ButtonDefaults.elevation(
+       elevation = ButtonDefaults.elevation(
             defaultElevation = 6.dp,
             pressedElevation = 8.dp,
-            disabledElevation = 0.dp
-        ),
+           disabledElevation = 0.dp
+       ),
         modifier = Modifier
             .fillMaxWidth(0.85f)
             .height(50.dp)
+            .background(Brush.verticalGradient(listOf(Color.Gray,Color.White,Color.Gray)))
     ) {
         Text(
             text = text,
             style = MaterialTheme.typography.button,
+            fontFamily = gunpPlay,
+            color = Color.Black
         )
     }
 }

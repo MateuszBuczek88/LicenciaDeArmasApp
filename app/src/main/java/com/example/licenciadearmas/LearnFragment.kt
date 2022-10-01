@@ -221,18 +221,22 @@ fun ShowPossibleAnswers(
 
 @Composable
 fun LoadingScreen() {
-    Surface {
+
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CircularProgressIndicator(strokeWidth = 5.dp, modifier = Modifier.size(80.dp, 80.dp))
+            CircularProgressIndicator(strokeWidth = 5.dp, modifier = Modifier.size(80.dp, 80.dp), color = colorResource(
+                id = R.color.logo_red
+            ))
+            Spacer(modifier = Modifier.height(20.dp))
             Text(
                 text = stringResource(id = R.string.loading_screen_message),
-                fontSize = 18.sp
+                fontSize = 18.sp,
+                fontFamily = gunpPlay
             )
         }
-    }
+
 }
 
 @Composable
