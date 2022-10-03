@@ -46,7 +46,6 @@ class LearnFragment : Fragment() {
             setContent {
                 LicenciaDeArmasTheme {
                     BackgroundBox()
-
                     val question: Question? by viewModel.question.observeAsState()
                     val questionsLeft by viewModel.questionsLeft.observeAsState()
                     val learScreenState by viewModel.learnScreenState.observeAsState()
@@ -58,7 +57,6 @@ class LearnFragment : Fragment() {
                             message = stringResource(id = R.string.learn_result_screen_message),
                             navigateHome = { findNavController().navigate(R.id.homeScreenFragment) },
                             playAgain = { findNavController().navigate(R.id.chooseSectionFragment) })
-
                         LearnScreenState.ShowQuestion -> questionsLeft?.let { _questionsLeft ->
                             ShowQuestion(
                                 question = question,
@@ -78,7 +76,7 @@ class LearnFragment : Fragment() {
                                 )
                             }
                         }
-                        null -> TODO()
+                        else -> FailureLoadingQuestionsToast()
                     }
                 }
             }
@@ -93,39 +91,13 @@ fun ShowQuestion(
     questionsLeft: Int
 ) {
 
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(8.dp)
-        ) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(8.dp)
+    ) {
 
-            question?.let {
-                Text(
-                    text = stringResource(id = R.string.questions_left, questionsLeft),
-                    fontSize = 24.sp,
-                    fontFamily = gunpPlay,
-                    color = colorResource(id = R.color.logo_red)
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                QuestionCard(question = question)
-                Spacer(modifier = Modifier.height(20.dp))
-                ShowPossibleAnswers(
-                    question = question,
-                    onAnswerButtonClick = onAnswerButtonClick
-                )
-            }
-        }
-
-}
-
-@Composable
-fun ShowAnswers(question: Question, onSurfaceClick: () -> Unit, questionsLeft: Int) {
-
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(8.dp)
-        ) {
+        question?.let {
             Text(
                 text = stringResource(id = R.string.questions_left, questionsLeft),
                 fontSize = 24.sp,
@@ -135,9 +107,35 @@ fun ShowAnswers(question: Question, onSurfaceClick: () -> Unit, questionsLeft: I
             Spacer(modifier = Modifier.height(20.dp))
             QuestionCard(question = question)
             Spacer(modifier = Modifier.height(20.dp))
-            ShowCorrectAnswer(question = question)
+            ShowPossibleAnswers(
+                question = question,
+                onAnswerButtonClick = onAnswerButtonClick
+            )
+        }
+    }
+}
 
-
+@Composable
+fun ShowAnswers(
+    question: Question,
+    onSurfaceClick: () -> Unit,
+    questionsLeft: Int
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(8.dp)
+    ) {
+        Text(
+            text = stringResource(id = R.string.questions_left, questionsLeft),
+            fontSize = 24.sp,
+            fontFamily = gunpPlay,
+            color = colorResource(id = R.color.logo_red)
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        QuestionCard(question = question)
+        Spacer(modifier = Modifier.height(20.dp))
+        ShowCorrectAnswer(question = question)
     }
     Surface(
         modifier = Modifier
@@ -199,9 +197,6 @@ fun ShowPossibleAnswers(
     onAnswerButtonClick: (String) -> Unit,
 ) {
 
-    Column {
-
-    }
     question.answersList.forEach {
         Button(
             onClick = {
@@ -224,21 +219,24 @@ fun ShowPossibleAnswers(
 @Composable
 fun LoadingScreen() {
 
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            CircularProgressIndicator(strokeWidth = 10.dp, modifier = Modifier.size(100.dp, 100.dp), color = colorResource(
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(
+            strokeWidth = 10.dp,
+            modifier = Modifier.size(100.dp, 100.dp),
+            color = colorResource(
                 id = R.color.logo_red
-            ))
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(id = R.string.loading_screen_message),
-                fontSize = 18.sp,
-                fontFamily = gunpPlay
             )
-        }
-
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(
+            text = stringResource(id = R.string.loading_screen_message),
+            fontSize = 18.sp,
+            fontFamily = gunpPlay
+        )
+    }
 }
 
 @Composable

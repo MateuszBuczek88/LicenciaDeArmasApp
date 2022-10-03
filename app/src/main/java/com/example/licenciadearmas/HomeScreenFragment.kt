@@ -8,7 +8,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,13 +43,10 @@ class HomeScreenFragment : Fragment() {
             setContent {
                 LicenciaDeArmasTheme {
                     BackgroundBox()
-
                     HomeScreenContent(
                         onLearnClick = { findNavController().navigate(R.id.chooseSectionFragment) },
-                        onTestClick = { findNavController().navigate(R.id.testFragment) },
-
-                        )
-
+                        onTestClick = { findNavController().navigate(R.id.testFragment) }
+                    )
                 }
             }
         }
@@ -59,20 +59,21 @@ fun HomeScreenContent(
     onTestClick: () -> Unit,
 ) {
     Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .verticalScroll(rememberScrollState())
-            .fillMaxSize()
-    ) {
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+
+        ) {
         Spacer(modifier = Modifier.height(25.dp))
         MainText(textRes = R.string.home_screen_main_text)
 
         SecondaryText(textRes = R.string.home_screen_secondary_text)
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(4f))
 
         HomeScreenImage(imageRes = R.drawable.ic_lda_logo)
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(4f, true))
 
         HomeScreenButton(
             text = stringResource(id = R.string.learn_button_text),
@@ -115,7 +116,6 @@ fun HomeScreenButton(text: String, onClick: () -> Unit) {
 
 @Composable
 fun HomeScreenImage(imageRes: Int) {
-
     Image(
         imageVector = ImageVector.vectorResource(id = imageRes),
         contentDescription = "logo",
@@ -147,10 +147,7 @@ fun SecondaryText(textRes: Int) {
 
 @Composable
 fun BackgroundBox() {
-    Box(
-        modifier = Modifier.fillMaxSize()
-
-    )
+    Box(modifier = Modifier.fillMaxSize())
     {
         Image(
             bitmap = ImageBitmap.imageResource(id = R.drawable.background),

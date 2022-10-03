@@ -54,16 +54,16 @@ class TestFragment : Fragment() {
                             { findNavController().navigate(R.id.homeScreenFragment) },
                             { findNavController().navigate(R.id.testFragment) }
                         )
-                        TestScreenState.ShowQuestion -> questionsLeft?.let {
+                        TestScreenState.ShowQuestion -> questionsLeft?.let { _questionsLeft ->
                             TestContent(
-                                questionsLeft = it,
+                                questionsLeft = _questionsLeft,
                                 question = question,
                                 onAnswerButtonClick = { answer ->
                                     viewModel.checkAnswer(answer)
                                 }
                             )
                         }
-                        null -> TODO()
+                        else -> FailureLoadingQuestionsToast()
                     }
                 }
             }
@@ -78,7 +78,6 @@ fun TestContent(
     question: Question?,
     onAnswerButtonClick: (String) -> Unit
 ) {
-
 
     question?.let {
 
@@ -101,7 +100,6 @@ fun TestContent(
                 onAnswerButtonClick = onAnswerButtonClick
             )
         }
-
     }
 }
 

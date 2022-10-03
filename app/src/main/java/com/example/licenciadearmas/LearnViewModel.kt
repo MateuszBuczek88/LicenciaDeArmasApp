@@ -20,7 +20,8 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
                     _question.value = questionList.firstOrNull()
                     _questionsLeft.value = questionList.size
                     _learnScreenState.value = LearnScreenState.ShowQuestion
-                }, onFailure = {
+                },
+                onFailure = {
                     _learnScreenState.value = LearnScreenState.LoadError
                 })
         }
@@ -29,6 +30,7 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
     private val _learnScreenState = MutableLiveData(LearnScreenState.IsLoading)
     val learnScreenState: LiveData<LearnScreenState>
         get() = _learnScreenState
+
     private val _questionsLeft = MutableLiveData(0)
     val questionsLeft: LiveData<Int>
         get() = _questionsLeft
@@ -36,6 +38,7 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
     private val _question = MutableLiveData<Question?>(null)
     val question: LiveData<Question?>
         get() = _question
+
     private var answer = ""
 
     fun showAnswer(chosenAnswer: String) {

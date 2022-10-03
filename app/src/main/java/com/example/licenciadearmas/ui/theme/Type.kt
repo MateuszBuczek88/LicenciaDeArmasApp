@@ -14,7 +14,6 @@ val robotoFont = FontFamily(
 )
 val gunpPlay = FontFamily(
     Font(R.font.gunplay_rg),
-
 )
 // Set of Material typography styles to start with
 val Typography = Typography(

@@ -42,6 +42,7 @@ class TestViewModel(val repository: IQuestionRepository) : ViewModel() {
     private val _testScreenState = MutableLiveData(TestScreenState.IsLoading)
     val testScreenState: LiveData<TestScreenState>
         get() = _testScreenState
+    
     private val _questionsLeft = MutableLiveData(0)
     val questionsLeft: LiveData<Int>
         get() = _questionsLeft
