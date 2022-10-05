@@ -49,6 +49,7 @@ class LearnFragment : Fragment() {
                     val question: Question? by viewModel.question.observeAsState()
                     val questionsLeft by viewModel.questionsLeft.observeAsState()
                     val learScreenState by viewModel.learnScreenState.observeAsState()
+                    val chosenAnswer by viewModel.chosenAnswer.observeAsState()
 
                     when (learScreenState) {
                         LearnScreenState.IsLoading -> LoadingScreen()
@@ -72,7 +73,8 @@ class LearnFragment : Fragment() {
                                 ShowAnswers(
                                     question = question,
                                     onSurfaceClick = { viewModel.loadNextQuestion() },
-                                    questionsLeft = it
+                                    questionsLeft = it,
+                                    chosenAnswer = chosenAnswer!!
                                 )
                             }
                         }
@@ -119,7 +121,9 @@ fun ShowQuestion(
 fun ShowAnswers(
     question: Question,
     onSurfaceClick: () -> Unit,
-    questionsLeft: Int
+    questionsLeft: Int,
+    chosenAnswer:String
+
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -135,7 +139,7 @@ fun ShowAnswers(
         Spacer(modifier = Modifier.height(20.dp))
         QuestionCard(question = question)
         Spacer(modifier = Modifier.height(20.dp))
-        ShowCorrectAnswer(question = question)
+        ShowCorrectAnswer(question = question,chosenAnswer = chosenAnswer)
     }
     Surface(
         modifier = Modifier
@@ -158,18 +162,19 @@ fun QuestionCard(question: Question) {
 }
 
 @Composable
-fun ShowCorrectAnswer(question: Question) {
+fun ShowCorrectAnswer(question: Question, chosenAnswer:String) {
 
     question.answersList.forEach {
-        val color =
-            if (it == question.rightAnswer) colorResource(id = R.color.logo_green) else colorResource(
-                id = R.color.logo_red
-            )
+        val color = when(it){
+            question.rightAnswer -> colorResource(id = R.color.logo_green)
+            chosenAnswer -> colorResource(id = R.color.logo_red)
+            else -> colorResource(id = R.color.primaryColor)
+        }
 
         Button(
             onClick = {},
-            enabled = false,
-            colors = ButtonDefaults.buttonColors(disabledBackgroundColor = color),
+
+            colors = ButtonDefaults.buttonColors(backgroundColor = color),
             modifier = Modifier
                 .fillMaxWidth(0.95f),
             elevation = ButtonDefaults.elevation(
@@ -184,7 +189,6 @@ fun ShowCorrectAnswer(question: Question) {
                 Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Left,
                 style = MaterialTheme.typography.button,
-                color = Color.Black
             )
         }
         Spacer(modifier = Modifier.height(8.dp))

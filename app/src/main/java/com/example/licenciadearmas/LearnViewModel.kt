@@ -39,15 +39,17 @@ class LearnViewModel(val repository: IQuestionRepository, val section: Section) 
     val question: LiveData<Question?>
         get() = _question
 
-    private var answer = ""
+    private var _chosenAnswer = MutableLiveData("")
+    val chosenAnswer :LiveData<String>
+    get() = _chosenAnswer
 
     fun showAnswer(chosenAnswer: String) {
         _learnScreenState.value = LearnScreenState.ShowAnswer
-        answer = chosenAnswer
+        _chosenAnswer.value = chosenAnswer
     }
 
     fun loadNextQuestion() {
-        if (answer == _question.value?.rightAnswer) rightAnswer() else wrongAnswer()
+        if (_chosenAnswer.value == _question.value?.rightAnswer) rightAnswer() else wrongAnswer()
         _questionsLeft.value = questionList.size
     }
 
