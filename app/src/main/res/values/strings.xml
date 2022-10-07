@@ -2,10 +2,10 @@
     <string name="app_name">Licencia De Armas</string>
 
     <!-- Buttons -->
-    <string name="learn_button_text">LEARN</string>
+    <string name="learn_button_text">ESTUDIAR</string>
     <string name="test_button_text">TEST</string>
-    <string name="home_button_text">Home</string>
-    <string name="again_button_text">Again</string>
+    <string name="home_button_text">Inicio</string>
+    <string name="again_button_text">Repetir</string>
     <string name="button_know_answer_text">I knew</string>
     <string name="button_didnt_know_text">I didnt know</string>
 
@@ -49,12 +49,12 @@
         \n\u2022 Historia de las armas de fuego, calibres, munición y pólvora.</string>
 
     <!-- Messages -->
-    <string name="failure_toast_message">Failure Loading Questions</string>
-    <string name="loading_screen_message">Loading</string>
-    <string name="learn_result_screen_message">All Questions Learned</string>
-    <string name="test_result_screen_message">Test complete!\n Right answers:%1$d\n Wrong answers:%2$d</string>
+    <string name="failure_toast_message">Error al cargar las preguntas.</string>
+    <string name="loading_screen_message">Cargando</string>
+    <string name="learn_result_screen_message">Has completado todas la preguntas.</string>
+    <string name="test_result_screen_message">Test finalizado!\n Respuestas correctas:%1$d\n Respuestas incorrectas:%2$d</string>
     <string name="home_screen_main_text">Licencia de Armas</string>
-    <string name="home_screen_secondary_text">Learn and test yourself!</string>
-    <string name="choosesection_screen_main_text">Choose section:</string>
-    <string name="questions_left">Questions left: %1$d</string>
+    <string name="home_screen_secondary_text">Aprende y comprueba tu nivelf!</string>
+    <string name="choosesection_screen_main_text">Escoge el tema:</string>
+    <string name="questions_left">Preguntas restantes: %1$d</string>
 </resources>
