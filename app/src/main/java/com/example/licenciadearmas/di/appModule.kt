@@ -1,5 +1,6 @@
 package com.example.licenciadearmas.di
 
+import com.example.licenciadearmas.HomeViewModel
 import com.example.licenciadearmas.LearnViewModel
 import com.example.licenciadearmas.TestViewModel
 import com.example.licenciadearmas.data.*
@@ -34,5 +35,8 @@ val appModule = module {
     }
     viewModel {
         TestViewModel(repository = get())
+    }
+    viewModel {
+        HomeViewModel()
     }
 }

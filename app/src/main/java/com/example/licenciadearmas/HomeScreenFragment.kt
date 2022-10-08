@@ -8,11 +8,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,6 +22,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,8 +31,10 @@ import androidx.navigation.findNavController
 import com.example.licenciadearmas.ui.theme.LicenciaDeArmasTheme
 import com.example.licenciadearmas.ui.theme.Shapes
 import com.example.licenciadearmas.ui.theme.gunpPlay
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeScreenFragment : Fragment() {
+    private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,11 +42,15 @@ class HomeScreenFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
+                val showCredits = viewModel.showCredits.observeAsState()
                 LicenciaDeArmasTheme {
                     BackgroundBox()
                     HomeScreenContent(
                         onLearnClick = { findNavController().navigate(R.id.chooseSectionFragment) },
-                        onTestClick = { findNavController().navigate(R.id.testFragment) }
+                        onTestClick = { findNavController().navigate(R.id.testFragment) },
+                        onCreditsClick = { viewModel.showCredits() },
+                        onDismissClick = { viewModel.hideCredits() },
+                        showCredits = showCredits.value!!
                     )
                 }
             }
@@ -57,6 +62,9 @@ class HomeScreenFragment : Fragment() {
 fun HomeScreenContent(
     onLearnClick: () -> Unit,
     onTestClick: () -> Unit,
+    onCreditsClick: () -> Unit,
+    onDismissClick: () -> Unit,
+    showCredits: Boolean
 ) {
     Column(
         modifier = Modifier
@@ -85,6 +93,12 @@ fun HomeScreenContent(
             text = stringResource(id = R.string.test_button_text),
             onClick = onTestClick
         )
+        Spacer(modifier = Modifier.height(25.dp))
+        HomeScreenButton(
+            text = stringResource(id = R.string.credits_button_text),
+            onClick = onCreditsClick
+        )
+        if (showCredits) CreditsDialog(onDismissClick = onDismissClick)
         Spacer(modifier = Modifier.height(65.dp))
     }
 }
@@ -156,4 +170,23 @@ fun BackgroundBox() {
             modifier = Modifier.fillMaxSize()
         )
     }
+}
+
+@Composable
+fun CreditsDialog(onDismissClick: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismissClick,
+        title = { Text(text = stringResource(id = R.string.credits_dialog_title)) },
+        text = { Text(text = stringResource(id = R.string.credits_dialog_content)) },
+        confirmButton = {
+            TextButton(onClick = onDismissClick, contentPadding = PaddingValues(0.dp)) {
+                Text(
+                    text = stringResource(id = R.string.credits_dialog_ok_button),
+                    fontSize = 18.sp,
+                    color = colorResource(id = R.color.logo_red),
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+    )
 }

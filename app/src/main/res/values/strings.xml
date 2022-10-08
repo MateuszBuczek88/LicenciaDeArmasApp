@@ -4,10 +4,10 @@
     <!-- Buttons -->
     <string name="learn_button_text">ESTUDIAR</string>
     <string name="test_button_text">TEST</string>
+    <string name="credits_button_text">CREDITS</string>
     <string name="home_button_text">Inicio</string>
     <string name="again_button_text">Repetir</string>
-    <string name="button_know_answer_text">I knew</string>
-    <string name="button_didnt_know_text">I didnt know</string>
+    <string name="credits_dialog_ok_button">OK</string>
 
     <!-- Section name -->
     <string name="section_1_name">Tema 1</string>
@@ -54,7 +54,20 @@
     <string name="learn_result_screen_message">Has completado todas la preguntas.</string>
     <string name="test_result_screen_message">Test finalizado!\n Respuestas correctas:%1$d\n Respuestas incorrectas:%2$d</string>
     <string name="home_screen_main_text">Licencia de Armas</string>
-    <string name="home_screen_secondary_text">Aprende y comprueba tu nivelf!</string>
+    <string name="home_screen_secondary_text">Aprende y comprueba tu nivel!</string>
     <string name="choosesection_screen_main_text">Escoge el tema:</string>
     <string name="questions_left">Preguntas restantes: %1$d</string>
+    <string name="credits_dialog_title">Licencia de Armas</string>
+    <string name="credits_dialog_content">
+        Aplikacja Linecia de Armas
+        \n
+        \n@2022 by DeveloperName
+        \n
+        \nAll rights reserved
+        \n
+        \nBaza pytań pochodzi z witryny guardiacivil.es
+        \n
+        \nUwaga! Choć dołożono wszelkich starań, aby baza pytań była aktualna i poprawna, aplikacja może zawierać błędy lub ulec deakutalizacji, przez co nie może być traktowana jako jedyne i pewne źródło informacji.
+        Choć życzymy wszystkim jak najlepszych wyników, nie odpowiadamy za niezaliczone egzaminy.
+    </string>
 </resources>
