@@ -33,6 +33,7 @@ After answering correct to all questions, a summary screen is shown.
 ## Finished test screen
 After answering to questions from the test list, which is generated randolmy each time, summary screen is shown.
 <br>It contains information about right and wrong answers and navigation buttons, that will allow user either navigate to home screen or start test over again
+
 <img src="https://user-images.githubusercontent.com/47189440/194597645-40b501e2-99e4-4b56-a077-3a687eac71b2.png" width="30%" height="30%">
 
 
