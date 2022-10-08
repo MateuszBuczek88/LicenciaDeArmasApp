@@ -45,13 +45,15 @@ class HomeScreenFragment : Fragment() {
                 val showCredits = viewModel.showCredits.observeAsState()
                 LicenciaDeArmasTheme {
                     BackgroundBox()
-                    HomeScreenContent(
-                        onLearnClick = { findNavController().navigate(R.id.chooseSectionFragment) },
-                        onTestClick = { findNavController().navigate(R.id.testFragment) },
-                        onCreditsClick = { viewModel.showCredits() },
-                        onDismissClick = { viewModel.hideCredits() },
-                        showCredits = showCredits.value!!
-                    )
+                    showCredits.value?.let { showCredits ->
+                        HomeScreenContent(
+                            onLearnClick = { findNavController().navigate(R.id.chooseSectionFragment) },
+                            onTestClick = { findNavController().navigate(R.id.testFragment) },
+                            onCreditsClick = { viewModel.showCredits() },
+                            onDismissClick = { viewModel.hideCredits() },
+                            showCredits = showCredits
+                        )
+                    }
                 }
             }
         }
