@@ -4,7 +4,7 @@
     <!-- Buttons -->
     <string name="learn_button_text">ESTUDIAR</string>
     <string name="test_button_text">TEST</string>
-    <string name="credits_button_text">CREDITS</string>
+    <string name="credits_button_text">CRÉDITOS</string>
     <string name="home_button_text">Inicio</string>
     <string name="again_button_text">Repetir</string>
     <string name="credits_dialog_ok_button">OK</string>
@@ -59,15 +59,15 @@
     <string name="questions_left">Preguntas restantes: %1$d</string>
     <string name="credits_dialog_title">Licencia de Armas</string>
     <string name="credits_dialog_content">
-        Aplikacja Linecia de Armas
+        APP Licencia de Armas
         \n
-        \n@2022 by DeveloperName
+        \n@2022 Titularidad de Mateusz Buczek
         \n
-        \nAll rights reserved
+        \nTodos los derechos reservados
         \n
-        \nBaza pytań pochodzi z witryny guardiacivil.es
+        \nLa base de datos utilizada para las preguntas es guardiacivil.es
         \n
-        \nUwaga! Choć dołożono wszelkich starań, aby baza pytań była aktualna i poprawna, aplikacja może zawierać błędy lub ulec deakutalizacji, przez co nie może być traktowana jako jedyne i pewne źródło informacji.
-        Choć życzymy wszystkim jak najlepszych wyników, nie odpowiadamy za niezaliczone egzaminy.
+        \nCuidado! Pese a los esfuerzos realizados para mantener la base de datos de preguntas actualizadas y libres de errores, existe el riesgo que el contenido pueda estar desactualizado. Por ello no debe tratarse el contenido de esta APP como la única fuente de información veraz.
+Descarga de responsabilidad: Deseamos que se obtengan los mejores resultados, pese a ello, esta APP no se responsabiliza por los exámenes no aprobados que puedan acontecer.
     </string>
 </resources>
