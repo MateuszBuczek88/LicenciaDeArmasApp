@@ -4,7 +4,7 @@ An Android app, which allows user to learn and test his knowledge for spanish gu
 ## Home screen
 Home screen allows the user to chose between learning and performing a test <br>which simulates the real Spanish gun license test.
 
-<img src="https://user-images.githubusercontent.com/47189440/194597616-8d8b6951-8b8a-405d-a3d3-8a229ec6a468.png" width="30%" height="30%">
+<img src="https://user-images.githubusercontent.com/47189440/194863599-c768fe38-927f-4aa8-937f-4556bcb5bdb2.png" width="30%" height="30%">
 
 ## Learn -> choose sections screen
 When learn option is chosen, user is allowed to make choice, which section he wants to learn.<br>There are seven sections to choose.
@@ -31,7 +31,7 @@ After answering correct to all questions, a summary screen is shown.
 <img src="https://user-images.githubusercontent.com/47189440/194597649-ed9eb479-c94c-44f1-a043-367bcba17783.png" width="30%" height="30%">
 
 ## Finished test screen
-After answering to questions from the test list, which is generated randolmy each time, summary screen is shown.
+After answering to questions from the test list, which is generated randomly each time, summary screen is shown.
 <br>It contains information about right and wrong answers and navigation buttons, that will allow user either navigate to home screen or start test over again
 
 <img src="https://user-images.githubusercontent.com/47189440/194597645-40b501e2-99e4-4b56-a077-3a687eac71b2.png" width="30%" height="30%">
