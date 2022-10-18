@@ -1,5 +1,11 @@
 # LicenciaDeArmasApp
-An Android app, which allows user to learn and test his knowledge for spanish gun licence.
+Android app, which allows user to learn and test his knowledge for spanish gun licence.
+Learning process is implemented by removing, right anawerred questions from the list.
+Wrong answered questions are moved to end of the list, and will be displayed to user again.
+Process is repeated until user will give right answer to all questions.
+Despite that, the app is currently using the internal data source, its structure, and used
+design patterns, allow usage of external data source like API, which is being implemented
+right now.
 
 ## Home screen
 Home screen allows the user to chose between learning and performing a test <br>which simulates the real Spanish gun license test.
