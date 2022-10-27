@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/homeScreenFragment"
-        android:name="com.example.licenciadearmas.HomeScreenFragment"
+        android:name="com.mbp.licenciadearmas.HomeScreenFragment"
         android:label="fragment_home_screen"/>
     <fragment
         android:id="@+id/learnFragment"
-        android:name="com.example.licenciadearmas.LearnFragment"
+        android:name="com.mbp.licenciadearmas.LearnFragment"
         android:label="LearnFragment" >
         <argument
             android:name="section"
-            app:argType="com.example.licenciadearmas.data.Section" />
+            app:argType="com.mbp.licenciadearmas.data.Section" />
     </fragment>
     <fragment
         android:id="@+id/chooseSectionFragment"
-        android:name="com.example.licenciadearmas.ChooseSectionFragment"
+        android:name="com.mbp.licenciadearmas.ChooseSectionFragment"
         android:label="ChooseSectionFragment" >
         <action
             android:id="@+id/action_chooseSectionFragment_to_learnFragment"
@@ -27,6 +27,6 @@
     </fragment>
     <fragment
         android:id="@+id/testFragment"
-        android:name="com.example.licenciadearmas.TestFragment"
+        android:name="com.mbp.licenciadearmas.TestFragment"
         android:label="TestFragment" />
 </navigation>
